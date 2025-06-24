@@ -1,0 +1,19 @@
+{
+    "version":      1,
+    "fileType":  "FactMetaData",
+    "QGC.MetaData.Facts":
+[
+{
+    "name": "dummyTiltFl",
+    "shortDesc": "Front Left Tilt",
+    "type": "double",
+    "units": "deg"
+},
+{
+    "name": "dummyTiltFr",
+    "shortDesc": "Front Right Tilt",
+    "type": "double",
+    "units": "deg"
+}
+]
+}
