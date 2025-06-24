@@ -90,7 +90,7 @@ Vehicle::Vehicle(LinkInterface*             link,
                  MAV_AUTOPILOT              firmwareType,
                  MAV_TYPE                   vehicleType,
                  QObject*                   parent)
-    : VehicleFactGroup              (parent)
+    : VehicleFactGroup              (parent) // Vehicle 클래스의 부모
     , _id                           (vehicleId)
     , _defaultComponentId           (defaultComponentId)
     , _firmwareType                 (firmwareType)
@@ -117,6 +117,9 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _efiFactGroup                 (this)
     , _rpmFactGroup                 (this)
     , _terrainFactGroup             (this)
+
+    , _fakeFactGroup (this)
+    , _tiltAngleFactGroup (this)
     , _terrainProtocolHandler       (new TerrainProtocolHandler(this, &_terrainFactGroup, this))
 {
     connect(JoystickManager::instance(), &JoystickManager::activeJoystickChanged, this, &Vehicle::_loadJoystickSettings);
@@ -219,6 +222,8 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _distanceSensorFactGroup          (this)
     , _localPositionFactGroup           (this)
     , _localPositionSetpointFactGroup   (this)
+    , _fakeFactGroup (this)
+    , _tiltAngleFactGroup (this)
 {
     // This will also set the settings based firmware/vehicle types. So it needs to happen first.
     if (_firmwareType == MAV_AUTOPILOT_TRACK) {
@@ -338,6 +343,9 @@ void Vehicle::_commonInit()
     _addFactGroup(&_efiFactGroup,               _efiFactGroupName);
     _addFactGroup(&_rpmFactGroup,               _rpmFactGroupName);
     _addFactGroup(&_terrainFactGroup,           _terrainFactGroupName);
+
+    _addFactGroup(&_fakeFactGroup, _fakeFactGroupName);
+    _addFactGroup(&_tiltAngleFactGroup, _tiltAngleFactGroupName);
 
     // Add firmware-specific fact groups, if provided
     QMap<QString, FactGroup*>* fwFactGroups = _firmwarePlugin->factGroups();
