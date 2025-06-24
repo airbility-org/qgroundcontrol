@@ -28,12 +28,14 @@ Item {
     property real maxCompassRadius:             ScreenTools.defaultFontPixelHeight * 7 / 2
     property real compassRadius:                Math.min(defaultCompassRadius, maxCompassRadius)
     property real compassBorder:                ScreenTools.defaultFontPixelHeight / 2
+    // 현재 활성화된 차량 객체 참조
     property var  vehicle:                      globals.activeVehicle
     property var  qgcPal:                       QGroundControl.globalPalette
     property bool usedByMultipleVehicleList:    false
 
     property real _totalAttitudeSize: attitudeSize + attitudeSpacing
 
+    // Roll을 표시, Vehicle이 없으면 0으로 표시
     IntegratedAttitudeIndicator {
         id:                     rollIndicator
         x:                      -_totalAttitudeSize

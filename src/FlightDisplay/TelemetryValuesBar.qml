@@ -45,6 +45,7 @@ Item {
         RowLayout {
             visible: factValueGrid.settingsUnlocked
 
+            // 잠금 해제 상태를 나타내는 자물쇠 아이콘
             QGCColoredImage {
                 source:             "qrc:/InstrumentValueIcons/lock-open.svg"
                 mipmap:             true
@@ -61,6 +62,7 @@ Item {
             }
         }
 
+        // 데이터 값을 표시하는 그리드 컴포넌트
         HorizontalFactValueGrid {
             id: factValueGrid
         }

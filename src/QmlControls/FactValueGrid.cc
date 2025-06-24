@@ -33,6 +33,8 @@ FactValueGrid::FactValueGrid(QQuickItem* parent)
     : QQuickItem(parent)
     , _columns  (new QmlObjectListModel(this))
 {
+    // 해당 경로의 모든 이미지 파일을 읽어와 _iconNames에 저장
+    // 계기판에서 사용할 수 있는 아이콘 목록을 한 번에 로드
     if (_iconNames.isEmpty()) {
         QDir iconDir(":/InstrumentValueIcons/");
         _iconNames = iconDir.entryList();
@@ -43,12 +45,13 @@ void FactValueGrid::componentComplete(void)
 {
     QQuickItem::componentComplete();
 
+    // fontSizeChanged 시그널 발생 시 saveSettings 호출
     connect(this, &FactValueGrid::fontSizeChanged, this, &FactValueGrid::_saveSettings);
 
     if (_specificVehicleForCard) {
         _vehicleCardInstanceList.append(this);
         _initForNewVehicle(_specificVehicleForCard);
-    } else {
+    } else { // 활성화된 비행체의 경우
         // We are not tracking a specific vehicle so we need to track the active vehicle or offline editing vehicle if not active vehicle
         auto multiVehicleManager = MultiVehicleManager::instance();
         connect(multiVehicleManager, &MultiVehicleManager::activeVehicleChanged, this, &FactValueGrid::_activeVehicleChanged);
@@ -67,6 +70,8 @@ void FactValueGrid::_initForNewVehicle(Vehicle* vehicle)
         return;
     }
 
+    // vehicleTypeChanged 시그널이 발생할때마다 
+    // _resetFromSettings 호출해 설정을 다시 로드
     connect(vehicle, &Vehicle::vehicleTypeChanged, this, &FactValueGrid::_resetFromSettings);
     _resetFromSettings();
 }
@@ -124,6 +129,7 @@ void FactValueGrid::setFontSize(FontSize fontSize)
     }
 }
 
+// InstrumentValueData 객체의 모든 속성을 QSettings에 저장
 void FactValueGrid::_saveValueData(QSettings& settings, InstrumentValueData* value)
 {
     settings.setValue(_textKey,         value->text());
@@ -153,6 +159,8 @@ void FactValueGrid::_saveValueData(QSettings& settings, InstrumentValueData* val
     settings.setValue(_factNameKey,         value->factName());
 }
 
+// QSettings에 저장된 값들을 읽어와 
+// 주어진 InstrumentValueData 객체에 설정
 void FactValueGrid::_loadValueData(QSettings& settings, InstrumentValueData* value)
 {
     QString factName = settings.value(_factNameKey).toString();
@@ -255,6 +263,7 @@ void FactValueGrid::deleteLastColumn(void)
 InstrumentValueData* FactValueGrid::_createNewInstrumentValueWorker(QObject* parent)
 {
     InstrumentValueData* value = new InstrumentValueData(this, parent);
+    // 기본으로 VehicleFactGroup의 AltitudeRelative 값을 세팅
     value->setFact(InstrumentValueData::vehicleFactGroupName, "AltitudeRelative");
     value->setText(value->fact()->shortDescription());
     _connectSaveSignals(value);
@@ -323,6 +332,7 @@ void FactValueGrid::_resetFromSettings(void)
     QSettings   settings;
     QString     groupNameFormat("%1-%2");
 
+    // 저장된 설정 (settings) 있는 경우
     if (settings.childGroups().contains(_settingsKey())) {
         // Load from settings
         settings.beginGroup(_settingsKey());
@@ -361,7 +371,7 @@ void FactValueGrid::_resetFromSettings(void)
             settings.endArray();
         }
         settings.endArray();
-    } else {
+    } else {// 기본 설정으로 초기화
         // Default settings are added directly to this FactValueGrid
         QGCCorePlugin::instance()->factValueGridCreateDefaultSettings(this);
     }

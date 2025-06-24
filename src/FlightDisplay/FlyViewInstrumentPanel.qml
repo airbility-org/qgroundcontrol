@@ -12,9 +12,11 @@ import QtQuick
 import QGroundControl
 import QGroundControl.Controls
 
-SelectableControl {
+// FlyView에서 어떤 계기판을 표시할지 선택
+SelectableControl { // QGC에서 정의한 커스텀 UI 컨트롤
     z:                      QGroundControl.zOrderWidgets
     selectionUIRightAnchor: true
+    // 선택한 계기판 QML 파일의 경로를 나타내는 값
     selectedControl:        QGroundControl.settingsManager.flyViewSettings.instrumentQmlFile
 
     property var  missionController:    _missionController

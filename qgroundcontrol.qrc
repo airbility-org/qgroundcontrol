@@ -358,6 +358,8 @@
         <file alias="DebugWindow.qml">src/UI/preferences/DebugWindow.qml</file>
         <file alias="MockLink.qml">src/UI/preferences/MockLink.qml</file>
         <file alias="MockLinkSettings.qml">src/UI/preferences/MockLinkSettings.qml</file>
+        
+        <file alias="QGroundControl/FlightDisplay/CustomDisplayPanel.qml">src/FlightDisplay/CustomDisplayPanel.qml</file>
     </qresource>
     <qresource prefix="/FirstRunPromptDialogs">
         <file alias="UnitsFirstRunPrompt.qml">src/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml</file>
@@ -430,6 +432,9 @@
         <file alias="Viewer3D.SettingsGroup.json">src/Settings/Viewer3D.SettingsGroup.json</file>
         <file alias="GimbalController.SettingsGroup.json">src/Settings/GimbalController.SettingsGroup.json</file>
         <file alias="CameraMetaData.json">src/Camera/CameraMetaData.json</file>
+        
+        <file alias="Vehicle/FakeFactGroup.json">src/Vehicle/FactGroups/FakeFactGroup.json</file>
+        <file alias="Vehicle/CustomTiltAngleFactGroup.json">src/Vehicle/FactGroups/CustomTiltAngleFactGroup.json</file>
     </qresource>
     <qresource prefix="/MockLink">
         <file alias="APMArduSubMockLink.params">src/Comms/MockLink/APMArduSubMockLink.params</file>

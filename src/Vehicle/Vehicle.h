@@ -46,6 +46,9 @@
 #include "VehicleWindFactGroup.h"
 #include "GimbalController.h"
 
+#include "FakeFactGroup.h"
+#include "CustomTiltAngleFactGroup.h"
+
 class Actuators;
 class AutoPilotPlugin;
 class Autotune;
@@ -252,6 +255,8 @@ public:
 
     // FactGroup object model properties
 
+    Q_PROPERTY(FactGroup*           tiltAngle         READ tiltAngleFactGroup           CONSTANT)
+    Q_PROPERTY(FactGroup*           fake         READ fakeFactGroup           CONSTANT)
     Q_PROPERTY(FactGroup*           vehicle         READ vehicleFactGroup           CONSTANT)
     Q_PROPERTY(FactGroup*           gps             READ gpsFactGroup               CONSTANT)
     Q_PROPERTY(FactGroup*           gps2            READ gps2FactGroup              CONSTANT)
@@ -610,6 +615,9 @@ public:
     FactGroup* generatorFactGroup           () { return &_generatorFactGroup; }
     FactGroup* efiFactGroup                 () { return &_efiFactGroup; }
     FactGroup* rpmFactGroup                 () { return &_rpmFactGroup; }
+
+    FactGroup* fakeFactGroup () { return &_fakeFactGroup; }
+    FactGroup* tiltAngleFactGroup () { return &_tiltAngleFactGroup; }
     QmlObjectListModel* batteries           () { return &_batteryFactGroupListModel; }
 
     MissionManager*                 missionManager      () { return _missionManager; }
@@ -1252,6 +1260,9 @@ private:
     const QString _efiFactGroupName =                QStringLiteral("efi");
     const QString _rpmFactGroupName =                QStringLiteral("rpm");
 
+    const QString _fakeFactGroupName = QStringLiteral("fake");
+    const QString _tiltAngleFactGroupName = QStringLiteral("tiltAngle");
+
     VehicleFactGroup*               _vehicleFactGroup;
     VehicleGPSFactGroup             _gpsFactGroup;
     VehicleGPS2FactGroup            _gps2FactGroup;
@@ -1270,6 +1281,10 @@ private:
     VehicleEFIFactGroup             _efiFactGroup;
     VehicleRPMFactGroup             _rpmFactGroup;
     TerrainFactGroup                _terrainFactGroup;
+
+    FakeFactGroup _fakeFactGroup;
+    CustomTiltAngleFactGroup _tiltAngleFactGroup;
+    
     QmlObjectListModel              _batteryFactGroupListModel;
 
     TerrainProtocolHandler* _terrainProtocolHandler = nullptr;

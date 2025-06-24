@@ -30,7 +30,7 @@ import QGroundControl.Vehicle
 // 3D Viewer modules
 import Viewer3D
 
-Item {
+Item { // FlyView의 최상위 컨테이너
     id: _root
 
     // These should only be used by MainRootWindow
@@ -46,6 +46,7 @@ Item {
         Component.onCompleted:  start()
     }
 
+    // FlyView의 전역 속성들
     property bool   _mainWindowIsMap:       mapControl.pipState.state === mapControl.pipState.fullState
     property bool   _isFullWindowItemDark:  _mainWindowIsMap ? mapControl.isSatelliteMap : true
     property var    _activeVehicle:         QGroundControl.multiVehicleManager.activeVehicle
@@ -90,8 +91,8 @@ Item {
         anchors.bottom:     parent.bottom
         anchors.left:       parent.left
         anchors.right:      parent.right
-
-        FlyViewMap {
+        
+        FlyViewMap { // 비행 지도 컴포넌트
             id:                     mapControl
             planMasterController:   _planController
             rightPanelWidth:        ScreenTools.defaultFontPixelHeight * 9
@@ -123,7 +124,7 @@ Item {
             property real bottomEdgeLeftInset: visible ? height + anchors.margins : 0
         }
 
-        FlyViewWidgetLayer {
+        FlyViewWidgetLayer { // 비행 데이터를 표시하는 위젯 레이어
             id:                     widgetLayer
             anchors.top:            parent.top
             anchors.bottom:         parent.bottom

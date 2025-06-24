@@ -49,3 +49,5 @@ QGCVideoBackground              1.0 QGCVideoBackground.qml
 TelemetryValuesBar              1.0 TelemetryValuesBar.qml
 TerrainProgress                 1.0 TerrainProgress.qml
 VehicleWarnings                 1.0 VehicleWarnings.qml
+
+CustomDisplayPanel              1.0 CustomDisplayPanel.qml

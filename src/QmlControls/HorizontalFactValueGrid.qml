@@ -20,7 +20,8 @@ import QGroundControl.Palette
 import QGroundControl.FlightMap
 import QGroundControl
 
-T.HorizontalFactValueGrid {
+// HorizontalFactValueGrid 템플릿이 내부적으로 Fact 객체를 관리하는 데이터 모델을 가지고 있음
+T.HorizontalFactValueGrid { 
     id:                     _root
     Layout.preferredWidth:  topLayout.width
     Layout.preferredHeight: topLayout.height
@@ -46,7 +47,8 @@ T.HorizontalFactValueGrid {
                 spacing:    ScreenTools.defaultFontPixelWidth * 1.25
 
                 Repeater {
-                    model: _root.columns
+                    // 자신이 가지고 있는 columns라는 이름의 model 참조
+                    model: _root.columns // Fact 객체들의 목록
 
                     GridLayout {
                         rows:           object.count
@@ -55,20 +57,27 @@ T.HorizontalFactValueGrid {
                         columnSpacing:  ScreenTools.defaultFontPixelWidth / 4
                         flow:           GridLayout.TopToBottom
 
+                        // 각 열 내부에서 InstrumentValueLabel과 InstrumentValueValue가
+                        // 한 쌍으로 표시됨
+                        // InstrumentValueLabel : e.g. "roll"
+                        // InstrumentValueValue : e.g. "12.3 deg"
                         Repeater {
                             id:     labelRepeater
-                            model:  object
+                            model:  object // 상위 Repeater의 현재 항목
 
+                            // Fact의 이름을 표시하는 QML 컴포넌트
+                            // e.g. roll, pitch
                             InstrumentValueLabel {
                                 Layout.fillHeight:      true
                                 Layout.alignment:       Qt.AlignRight
+                                // labelRepeater의 현재 항목
                                 instrumentValueData:    object
                             }
                         }
 
                         Repeater {
                             id:     valueRepeater
-                            model:  object
+                            model:  object // 상위 repeater의 현재 항목
 
                             property real   _index:     index
                             property real   maxWidth:   0
@@ -82,10 +91,12 @@ T.HorizontalFactValueGrid {
                                 maxWidth = Math.min(maxWidth, newMaxWidth)
                             }
 
+                            // Fact의 실제 값을 표시하는 QML
                             InstrumentValueValue {
                                 Layout.fillHeight:      true
                                 Layout.alignment:       Qt.AlignLeft
                                 Layout.preferredWidth:  valueRepeater.maxWidth
+                                // valueRepeater의 현재 항목
                                 instrumentValueData:    object
 
                                 property real lastContentWidth
@@ -186,7 +197,9 @@ T.HorizontalFactValueGrid {
             //console.log(mouse.x, mouse.y, columnGridLayoutItem)
             var mappedMouse = labelValueColumnLayout.mapToItem(columnGridLayoutItem, mouse.x, mouse.y)
             var labelOrDataItem = columnGridLayoutItem.childAt(mappedMouse.x, mappedMouse.y)
-            //console.log(mappedMouse.x, mappedMouse.y, labelOrDataItem, labelOrDataItem ? labelOrDataItem.instrumentValueData : "null", labelOrDataItem && labelOrDataItem.parent ? labelOrDataItem.parent.instrumentValueData : "null")
+            console.log(mappedMouse.x, mappedMouse.y, labelOrDataItem, labelOrDataItem ? labelOrDataItem.instrumentValueData : "null", labelOrDataItem && labelOrDataItem.parent ? labelOrDataItem.parent.instrumentValueData : "null")
+
+            // 클릭된 데이터의 속성 값을 팝업창에 넘겨줌
             if (labelOrDataItem && labelOrDataItem.instrumentValueData !== undefined) {
                 valueEditDialog.createObject(mainWindow, { instrumentValueData: labelOrDataItem.instrumentValueData }).open()
             }
@@ -195,7 +208,7 @@ T.HorizontalFactValueGrid {
 
     Component {
         id: valueEditDialog
-
+        // 각 항목 더블클릭 시 뜨게 되는 팝업 컴포넌트
         InstrumentValueEditDialog { }
     }
 }

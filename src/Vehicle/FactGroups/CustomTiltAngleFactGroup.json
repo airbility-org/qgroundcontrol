@@ -1,0 +1,31 @@
+{
+    "version":      1,
+    "fileType":  "FactMetaData",
+    "QGC.MetaData.Facts":
+[
+{
+    "name": "tiltFl",
+    "shortDesc": "Front Left Tilt",
+    "type": "float",
+    "units": "deg"
+},
+{
+    "name": "tiltFr",
+    "shortDesc": "Front Right Tilt",
+    "type": "float",
+    "units": "deg"
+},
+{
+    "name": "tiltRl",
+    "shortDesc": "Rear Left Tilt",
+    "type": "float",
+    "units": "deg"
+},
+{
+    "name": "tiltRr",
+    "shortDesc": "Rear Right Tilt",
+    "type": "float",
+    "units": "deg"
+}
+]
+}

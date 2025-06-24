@@ -6,7 +6,6 @@
  * COPYING.md in the root of the source code directory.
  *
  ****************************************************************************/
-
 import QtQuick
 import QtQuick.Dialogs
 import QtQuick.Layouts
@@ -25,11 +24,13 @@ QGCPopupDialog {
     title:      qsTr("Telemetry Display")
     buttons:    Dialog.Close
 
+    // HorizontalFactValueGrid 여기에서 넘겨준다.
     property var instrumentValueData
 
     QGCPalette { id: qgcPal;        colorGroupEnabled: parent.enabled }
     QGCPalette { id: qgcPalDisable; colorGroupEnabled: false }
 
+    // 조건에 따라 다른 컴포넌트를 불러오는 동적 UI
     Loader {
         sourceComponent: instrumentValueData.fact ? editorComponent : noFactComponent
     }
@@ -45,6 +46,7 @@ QGCPopupDialog {
     Component {
         id: editorComponent
 
+        // 가로 정렬
         RowLayout {
             spacing: ScreenTools.defaultFontPixelWidth
 
@@ -54,9 +56,11 @@ QGCPopupDialog {
                 SettingsGroupLayout {
                     heading: qsTr("Telemetry")
 
+                    // 드롭다운
                     LabelledComboBox {
                         id:                     factGroupCombo
-                        label:                  qsTr("Group")
+                        label:                  qsTr("Group") // Group 이라고 화면 상 표시
+                        // InstrumentValueData::factGroupNames 메서드로 FactGroup명 불러오기
                         model:                  instrumentValueData.factGroupNames
                         currentIndex:           instrumentValueData.factGroupNames.indexOf(instrumentValueData.factGroupName)
                         onActivated: (index) => {
@@ -239,6 +243,7 @@ QGCPopupDialog {
                         }
 
                         Component.onCompleted: {
+                            console.log("✅ FactGroups available:", JSON.stringify(QGroundControl.factSystem && QGroundControl.factSystem.factGroupNames ? QGroundControl.factSystem.factGroupNames : []))
                             updateSourceComponent()
                             if (sourceComponent) {
                                 height = item.childrenRect.height

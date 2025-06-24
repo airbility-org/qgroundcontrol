@@ -22,6 +22,7 @@ class InstrumentValueData : public QObject
     Q_OBJECT
 
 public:
+    // 값이 특정 범위에 있을 때 색상이나 아이콘을 바꿔주는 설정
     enum RangeType {
         NoRangeInfo = 0,
         ColorRange,
@@ -58,8 +59,8 @@ public:
     Q_INVOKABLE void    addRangeValue   (void);
     Q_INVOKABLE void    removeRangeValue(int index);
 
-    QStringList     factGroupNames          (void) const;
-    QStringList     factValueNames          (void) const;
+    QStringList     factGroupNames          (void) const; // FactGroup의 목록
+    QStringList     factValueNames          (void) const; // Fact 목록록
     QString         factGroupName           (void) const { return _factGroupName; }
     QString         factName                (void) const { return _factName; }
     Fact*           fact                    (void) const { return _fact; }
@@ -144,6 +145,7 @@ private:
 
 };
 
+// QML에서 InstrumentValueData enum을 사용할 수 있도록 등록
 QML_DECLARE_TYPE(InstrumentValueData)
 
 Q_DECLARE_METATYPE(InstrumentValueData::RangeType)

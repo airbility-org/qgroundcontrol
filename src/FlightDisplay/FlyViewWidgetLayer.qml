@@ -17,7 +17,7 @@ import QtPositioning
 import QtQuick.Window
 import QtQml.Models
 
-import QGroundControl
+import QGroundControl // QGC에서 자체 정의한 컴포넌트 가져오기
 import QGroundControl.Controls
 import QGroundControl.Controllers
 import QGroundControl.Controls
@@ -32,6 +32,7 @@ import QGroundControl.Vehicle
 Item {
     id: _root
 
+    // 해당 요소가 가질 수 있는 데이터 정의
     property var    parentToolInsets
     property var    totalToolInsets:        _totalToolInsets
     property var    mapControl

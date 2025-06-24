@@ -267,6 +267,7 @@ void QGCApplication::init()
 {
     SettingsManager::instance()->init();
 
+    // QML 타입 등록
     LinkManager::registerQmlTypes();
     ParameterManager::registerQmlTypes();
     QGroundControlQmlGlobal::registerQmlTypes();
@@ -318,11 +319,12 @@ void QGCApplication::init()
         qCWarning(QGCApplicationLog) << "Could not load /fonts/opensans-demibold font";
     }
 
+    // 애플리케이션 모드에 따른 초기화 분기
     if (_simpleBootTest) {
         // Since GStream builds are so problematic we initialize video during the simple boot test
         // to make sure it works and verfies plugin availability.
         _initVideo();
-    } else if (!_runningUnitTests) {
+    } else if (!_runningUnitTests) { // 일반 애플리케이션 부팅 시
         _initForNormalAppBoot();
     }
 }
@@ -344,11 +346,15 @@ void QGCApplication::_initForNormalAppBoot()
     _initVideo(); // GStreamer must be initialized before QmlEngine
 
     QQuickStyle::setStyle("Basic");
+
+    // 각종 인스턴스 초기화
     QGCCorePlugin::instance()->init();
     MAVLinkProtocol::instance()->init();
     MultiVehicleManager::instance()->init();
     _qmlAppEngine = QGCCorePlugin::instance()->createQmlApplicationEngine(this);
     QObject::connect(_qmlAppEngine, &QQmlApplicationEngine::objectCreationFailed, this, QCoreApplication::quit, Qt::QueuedConnection);
+    
+    // CorePlugin을 통해 루트 윈도우(메인 UI) 생성
     QGCCorePlugin::instance()->createRootWindow(_qmlAppEngine);
 
     AudioOutput::instance()->init(SettingsManager::instance()->appSettings()->audioMuted());

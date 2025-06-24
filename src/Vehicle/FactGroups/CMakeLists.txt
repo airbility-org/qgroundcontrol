@@ -38,6 +38,12 @@ target_sources(${CMAKE_PROJECT_NAME}
         VehicleWindFactGroup.h
         VehicleHygrometerFactGroup.cc
         VehicleHygrometerFactGroup.h
+
+        FakeFactGroup.cc
+        FakeFactGroup.h
+
+        CustomTiltAngleFactGroup.cc
+        CustomTiltAngleFactGroup.h
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

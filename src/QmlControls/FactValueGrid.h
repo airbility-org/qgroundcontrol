@@ -33,7 +33,7 @@ public:
         LargeFontSize,
     };
     Q_ENUMS(FontSize)
-
+    // 표시할 Fact 객체들의 목록
     Q_PROPERTY(QmlObjectListModel*  columns         MEMBER _columns                                     NOTIFY columnsChanged)
     Q_PROPERTY(int                  rowCount        MEMBER _rowCount                                    NOTIFY rowCountChanged)
     Q_PROPERTY(QStringList          iconNames       READ iconNames                                      CONSTANT)
