@@ -40,9 +40,6 @@ Rectangle {
     Column {
         anchors.centerIn: parent
         spacing: 10
-        Label {
-            text: _activeVehicle.
-        }
 
         Label {
             text: "Dummy Tilt FL: " + (_activeVehicle ? _activeVehicle.fake.dummyTiltFl.valueString : "--")
