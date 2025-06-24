@@ -105,6 +105,7 @@ Fact *FactGroup::getFact(const QString &name) const
     return fact;
 }
 
+// QString으로 지정된 name과 일치하는 FactGroup의 포인터를 반환
 FactGroup *FactGroup::getFactGroup(const QString &name) const
 {
     FactGroup * factGroup = nullptr;

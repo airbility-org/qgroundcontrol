@@ -25,6 +25,7 @@ import QGroundControl.UTMSP
 
 /// @brief Native QML top level window
 /// All properties defined here are visible to all QML pages.
+// QtQuick.Window 모듈의 ApplicationWindow를 최상위 요소로 사용
 ApplicationWindow {
     id:             mainWindow
     minimumWidth:   ScreenTools.isMobile ? ScreenTools.screenWidth  : Math.min(ScreenTools.defaultFontPixelWidth * 100, Screen.width)
@@ -47,6 +48,7 @@ ApplicationWindow {
         firstRunPromptManager.nextPrompt()
     }
 
+    // 논리적 그룹화를 위한 QtObject
     QtObject {
         id: firstRunPromptManager
 
@@ -79,9 +81,11 @@ ApplicationWindow {
     //-------------------------------------------------------------------------
     //-- Global Scope Variables
 
+    // 전역 변수들을 캡슐화하는 QtObject
     QtObject {
-        id: globals
+        id: globals // 다른 QML에서 globals.~로 접근 가능
 
+        // 활성화된 차량 객체 (읽기 전용)
         readonly property var       activeVehicle:                  QGroundControl.multiVehicleManager.activeVehicle
         readonly property real      defaultTextHeight:              ScreenTools.defaultFontPixelHeight
         readonly property real      defaultTextWidth:               ScreenTools.defaultFontPixelWidth
@@ -110,6 +114,7 @@ ApplicationWindow {
 
     //-------------------------------------------------------------------------
     //-- Global Scope Functions
+    // 전역 범위에서 사용할 수 있는 함수 정의
 
     // This function is used to prevent view switching if there are validation errors
     function allowViewSwitch(previousValidationErrorCount = 0) {
@@ -283,7 +288,7 @@ ApplicationWindow {
     PlanView {
         id:             planView
         anchors.fill:   parent
-        visible:        false
+        visible:        false // 초기에는 화면에 보이지 않고 FlyView가 보임
     }
 
     footer: LogReplayStatusBar {

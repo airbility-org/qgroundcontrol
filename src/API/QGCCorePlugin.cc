@@ -188,11 +188,12 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(FactValueGrid* factValueG
             value->setText(value->fact()->shortDescription());
             value->setShowUnits(true);
         }
-    } else {
+    } else { // 메인 Telemetry bar과 같은 일반적인 그리드의 경우
         const bool includeFWValues = ((factValueGrid->vehicleClass() == QGCMAVLink::VehicleClassFixedWing) || (factValueGrid->vehicleClass() == QGCMAVLink::VehicleClassVTOL) || (factValueGrid->vehicleClass() == QGCMAVLink::VehicleClassAirship));
 
         factValueGrid->setFontSize(FactValueGrid::LargeFontSize);
-
+        
+        // 첫 번째 줄 세 개의 열 세팅
         (void) factValueGrid->appendColumn();
         (void) factValueGrid->appendColumn();
         (void) factValueGrid->appendColumn();
@@ -275,6 +276,11 @@ QQmlApplicationEngine *QGCCorePlugin::createQmlApplicationEngine(QObject *parent
 
 void QGCCorePlugin::createRootWindow(QQmlApplicationEngine *qmlEngine)
 {
+    // qmlEngine 객체를 사용해 qml 파일을 로드
+    // load() : 인자로 주어진 경로의 qml 파일을 읽어 QML 엔진에 로드, 정의된 요소 생성
+    // QStringLiteral : 문자열 리터럴을 QString 객체로 변환하기 위해 제공하는 매크로 
+    // "qrc:/qml/MainRootWindow.qml" 이 문자열 리터럴을 QString 객체로 변환하는데 
+    // 이때 런타임 성능을 최적화해 효율적으로 처리하라는 의미
     qmlEngine->load(QUrl(QStringLiteral("qrc:/qml/MainRootWindow.qml")));
 }
 

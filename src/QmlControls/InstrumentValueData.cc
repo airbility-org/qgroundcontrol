@@ -70,17 +70,25 @@ void InstrumentValueData::clearFact(void)
     emit showUnitsChanged       (_showUnits);
 }
 
+// 특정 Fact를 찾아서 연결하고  
+// 그 Fact 값 변경을 감지해 UI를 업데이트할 준비
 void InstrumentValueData::_setFactWorker(void)
 {
+    // InstrumentValueData가 이미 다른 Fact에 연결되어 있었다면
+    // 먼저 연결 해제
     if (_fact) {
         disconnect(_fact, &Fact::rawValueChanged, this, &InstrumentValueData::_updateRanges);
         _fact = nullptr;
     }
 
     FactGroup* factGroup = nullptr;
+
+    // 만약 vechicleFactGroup 이름과 같다면
+    // _vehicle 객체가 FactGroup처럼 동작
     if (_factGroupName == vehicleFactGroupName) {
         factGroup = _vehicle;
     } else {
+        // 그 외의 경우 _factGroupName 이름에 해당하는 FactGroup을 가져옴
         factGroup = _vehicle->getFactGroup(_factGroupName);
     }
 
@@ -339,7 +347,7 @@ QStringList InstrumentValueData::factGroupNames(void) const
         name[0] = name[0].toUpper();
     }
     groupNames.prepend(vehicleFactGroupName);
-
+    qDebug() << "DEBUG: Final factGroupNames (after prepend):" << groupNames; 
     return groupNames;
 }
 
