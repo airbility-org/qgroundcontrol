@@ -98,13 +98,6 @@ Item {
         property real rightEdgeCenterInset: rightEdgeTopInset
     }
 
-    CustomDisplayPanel {
-        id:     customDisplayPanel
-        anchors.margins: _layoutMargin
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-    }
-
     FlyViewBottomRightRowLayout {
         id:                 bottomRightRowLayout
         anchors.margins:    _layoutMargin
