@@ -7,25 +7,29 @@
     "name": "tiltFl",
     "shortDesc": "Front Left Tilt",
     "type": "float",
-    "units": "deg"
+    "units": "deg",
+    "decimalPlaces": 2
 },
 {
     "name": "tiltFr",
     "shortDesc": "Front Right Tilt",
     "type": "float",
-    "units": "deg"
+    "units": "deg",
+    "decimalPlaces": 2
 },
 {
     "name": "tiltRl",
     "shortDesc": "Rear Left Tilt",
     "type": "float",
-    "units": "deg"
+    "units": "deg",
+    "decimalPlaces": 2
 },
 {
     "name": "tiltRr",
     "shortDesc": "Rear Right Tilt",
     "type": "float",
-    "units": "deg"
+    "units": "deg",
+    "decimalPlaces": 2
 }
 ]
 }
