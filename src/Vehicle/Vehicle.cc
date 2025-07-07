@@ -121,6 +121,9 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _fakeFactGroup (this)
     , _tiltAngleFactGroup (this)
     , _terrainProtocolHandler       (new TerrainProtocolHandler(this, &_terrainFactGroup, this))
+    , _controlSurfaceCmdFactGroup(this)
+    , _escHbciFactGroup(this)
+
 {
     connect(JoystickManager::instance(), &JoystickManager::activeJoystickChanged, this, &Vehicle::_loadJoystickSettings);
     connect(MultiVehicleManager::instance(), &MultiVehicleManager::activeVehicleChanged, this, &Vehicle::_activeVehicleChanged);
@@ -224,6 +227,9 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _localPositionSetpointFactGroup   (this)
     , _fakeFactGroup (this)
     , _tiltAngleFactGroup (this)
+    , _controlSurfaceCmdFactGroup(this)
+    , _escHbciFactGroup(this)
+    
 {
     // This will also set the settings based firmware/vehicle types. So it needs to happen first.
     if (_firmwareType == MAV_AUTOPILOT_TRACK) {
@@ -346,6 +352,8 @@ void Vehicle::_commonInit()
 
     _addFactGroup(&_fakeFactGroup, _fakeFactGroupName);
     _addFactGroup(&_tiltAngleFactGroup, _tiltAngleFactGroupName);
+    _addFactGroup(&_controlSurfaceCmdFactGroup, _controlSurfaceCmdFactGroupName);
+    _addFactGroup(&_escHbciFactGroup, _escHbciFactGroupName);
 
     // Add firmware-specific fact groups, if provided
     QMap<QString, FactGroup*>* fwFactGroups = _firmwarePlugin->factGroups();

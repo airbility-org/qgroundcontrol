@@ -49,6 +49,10 @@
 #include "FakeFactGroup.h"
 #include "CustomTiltAngleFactGroup.h"
 
+#include "FactGroups/ControlSurfaceCmdFactGroup.h"
+
+#include "FactGroups/EscHBCIFactGroup.h"
+
 class Actuators;
 class AutoPilotPlugin;
 class Autotune;
@@ -255,6 +259,8 @@ public:
 
     // FactGroup object model properties
 
+    Q_PROPERTY(FactGroup*           escHbci           READ escHbciFactGroup         CONSTANT)
+    Q_PROPERTY(FactGroup*           controlSurfaceCmd READ controlSurfaceCmdFactGroup    CONSTANT)
     Q_PROPERTY(FactGroup*           tiltAngle         READ tiltAngleFactGroup           CONSTANT)
     Q_PROPERTY(FactGroup*           fake         READ fakeFactGroup           CONSTANT)
     Q_PROPERTY(FactGroup*           vehicle         READ vehicleFactGroup           CONSTANT)
@@ -618,6 +624,8 @@ public:
 
     FactGroup* fakeFactGroup () { return &_fakeFactGroup; }
     FactGroup* tiltAngleFactGroup () { return &_tiltAngleFactGroup; }
+    FactGroup* controlSurfaceCmdFactGroup() { return &_controlSurfaceCmdFactGroup; }
+    FactGroup* escHbciFactGroup() { return &_escHbciFactGroup; }
     QmlObjectListModel* batteries           () { return &_batteryFactGroupListModel; }
 
     MissionManager*                 missionManager      () { return _missionManager; }
@@ -1262,6 +1270,8 @@ private:
 
     const QString _fakeFactGroupName = QStringLiteral("fake");
     const QString _tiltAngleFactGroupName = QStringLiteral("tiltAngle");
+    const QString _controlSurfaceCmdFactGroupName = QStringLiteral("controlSurfaceCmd");
+    const QString _escHbciFactGroupName = QStringLiteral("escHbci");
 
     VehicleFactGroup*               _vehicleFactGroup;
     VehicleGPSFactGroup             _gpsFactGroup;
@@ -1284,6 +1294,8 @@ private:
 
     FakeFactGroup _fakeFactGroup;
     CustomTiltAngleFactGroup _tiltAngleFactGroup;
+    ControlSurfaceCmdFactGroup _controlSurfaceCmdFactGroup;
+    EscHBCIFactGroup _escHbciFactGroup;
     
     QmlObjectListModel              _batteryFactGroupListModel;
 

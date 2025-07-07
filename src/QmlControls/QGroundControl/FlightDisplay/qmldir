@@ -51,3 +51,6 @@ TerrainProgress                 1.0 TerrainProgress.qml
 VehicleWarnings                 1.0 VehicleWarnings.qml
 
 CustomDisplayPanel              1.0 CustomDisplayPanel.qml
+
+ControlSurfaceHUD               1.0 ControlSurfaceHUD.qml
+EscHBCIHud                      1.0 EscHBCIHud.qml
