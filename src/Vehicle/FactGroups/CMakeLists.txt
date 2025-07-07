@@ -44,6 +44,19 @@ target_sources(${CMAKE_PROJECT_NAME}
 
         CustomTiltAngleFactGroup.cc
         CustomTiltAngleFactGroup.h
+
+        ControlSurfaceCmdFactGroup.h
+        ControlSurfaceCmdFactGroup.cc
+
+        EscHBCIFactGroup.h
+        EscHBCIFactGroup.cc
 )
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${CMAKE_PROJECT_NAME}
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/libs/mavlink/include
+        ${CMAKE_SOURCE_DIR}/libs/mavlink/include/mavlink/v2.0
+        ${CMAKE_SOURCE_DIR}/libs/mavlink/include/mavlink/v2.0/development
+)

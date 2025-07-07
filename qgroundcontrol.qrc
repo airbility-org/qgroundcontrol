@@ -360,6 +360,8 @@
         <file alias="MockLinkSettings.qml">src/UI/preferences/MockLinkSettings.qml</file>
         
         <file alias="QGroundControl/FlightDisplay/CustomDisplayPanel.qml">src/FlightDisplay/CustomDisplayPanel.qml</file>
+        <file alias="QGroundControl/FlightDisplay/ControlSurfaceHUD.qml">src/FlightDisplay/ControlSurfaceHUD.qml</file>
+        <file alias="QGroundControl/FlightDisplay/EscHBCIHud.qml">src/FlightDisplay/EscHBCIHud.qml</file>        
     </qresource>
     <qresource prefix="/FirstRunPromptDialogs">
         <file alias="UnitsFirstRunPrompt.qml">src/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml</file>
@@ -435,6 +437,10 @@
         
         <file alias="Vehicle/FakeFactGroup.json">src/Vehicle/FactGroups/FakeFactGroup.json</file>
         <file alias="Vehicle/CustomTiltAngleFactGroup.json">src/Vehicle/FactGroups/CustomTiltAngleFactGroup.json</file>
+
+        <file alias="Vehicle/ControlSurfaceCmdFactGroup.json">src/Vehicle/FactGroups/ControlSurfaceCmdFactGroup.json</file>
+        <file alias="Vehicle/EscHBCIFactGroup.json">src/Vehicle/FactGroups/EscHBCIFactGroup.json</file>
+
     </qresource>
     <qresource prefix="/MockLink">
         <file alias="APMArduSubMockLink.params">src/Comms/MockLink/APMArduSubMockLink.params</file>
