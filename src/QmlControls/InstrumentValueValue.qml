@@ -41,7 +41,16 @@ ColumnLayout {
 
         function valueText() {
             if (instrumentValueData.fact) {
-                return instrumentValueData.fact.enumOrValueString + (instrumentValueData.showUnits ? " " + instrumentValueData.fact.units : "")
+                let fact = instrumentValueData.fact
+                let value = fact.value
+                let units = instrumentValueData.showUnits ? " " + fact.units : ""
+
+                if (typeof fact.decimalPlaces === "number" && typeof value === "number") {
+                    let formattedValue = value.toFixed(fact.decimalPlaces)
+                    return formattedValue + units
+                } else {
+                    return fact.enumOrValueString + units
+                }
             } else {
                 return qsTr("--.--")
             }

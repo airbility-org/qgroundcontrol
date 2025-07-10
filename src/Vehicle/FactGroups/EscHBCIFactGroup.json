@@ -1,0 +1,40 @@
+{
+    "version":      1,
+    "fileType":     "FactMetaData",
+    "QGC.MetaData.Facts": [
+        { "name": "voltageFl",       "shortDesc": "Voltage Front Left",      "type": "float",   "units": "V" },
+        { "name": "voltageFr",       "shortDesc": "Voltage Front Right",     "type": "float",   "units": "V" },
+        { "name": "voltageRl",       "shortDesc": "Voltage Rear Left",       "type": "float",   "units": "V" },
+        { "name": "voltageRr",       "shortDesc": "Voltage Rear Right",      "type": "float",   "units": "V" },
+
+        { "name": "currentFl",       "shortDesc": "Current Front Left",      "type": "float",   "units": "A" },
+        { "name": "currentFr",       "shortDesc": "Current Front Right",     "type": "float",   "units": "A" },
+        { "name": "currentRl",       "shortDesc": "Current Rear Left",       "type": "float",   "units": "A" },
+        { "name": "currentRr",       "shortDesc": "Current Rear Right",      "type": "float",   "units": "A" },
+
+        { "name": "rpmFl",           "shortDesc": "RPM Front Left",          "type": "int32",   "units": "RPM" },
+        { "name": "rpmFr",           "shortDesc": "RPM Front Right",         "type": "int32",   "units": "RPM" },
+        { "name": "rpmRl",           "shortDesc": "RPM Rear Left",           "type": "int32",   "units": "RPM" },
+        { "name": "rpmRr",           "shortDesc": "RPM Rear Right",          "type": "int32",   "units": "RPM" },
+
+        { "name": "motorTempFl",     "shortDesc": "Motor Temp Front Left",   "type": "int32",   "units": "degC" },
+        { "name": "motorTempFr",     "shortDesc": "Motor Temp Front Right",  "type": "int32",   "units": "degC" },
+        { "name": "motorTempRl",     "shortDesc": "Motor Temp Rear Left",    "type": "int32",   "units": "degC" },
+        { "name": "motorTempRr",     "shortDesc": "Motor Temp Rear Right",   "type": "int32",   "units": "degC" },
+
+        { "name": "escTempFl",       "shortDesc": "ESC Temp Front Left",     "type": "int32",   "units": "degC" },
+        { "name": "escTempFr",       "shortDesc": "ESC Temp Front Right",    "type": "int32",   "units": "degC" },
+        { "name": "escTempRl",       "shortDesc": "ESC Temp Rear Left",      "type": "int32",   "units": "degC" },
+        { "name": "escTempRr",       "shortDesc": "ESC Temp Rear Right",     "type": "int32",   "units": "degC" },
+
+        { "name": "outputPwmFl",     "shortDesc": "Output PWM Front Left",   "type": "float",   "units": "%" },
+        { "name": "outputPwmFr",     "shortDesc": "Output PWM Front Right",  "type": "float",   "units": "%" },
+        { "name": "outputPwmRl",     "shortDesc": "Output PWM Rear Left",    "type": "float",   "units": "%" },
+        { "name": "outputPwmRr",     "shortDesc": "Output PWM Rear Right",   "type": "float",   "units": "%" },
+
+        { "name": "inputPwmFl",      "shortDesc": "Input PWM Front Left",    "type": "float",   "units": "%" },
+        { "name": "inputPwmFr",      "shortDesc": "Input PWM Front Right",   "type": "float",   "units": "%" },
+        { "name": "inputPwmRl",      "shortDesc": "Input PWM Rear Left",     "type": "float",   "units": "%" },
+        { "name": "inputPwmRr",      "shortDesc": "Input PWM Rear Right",    "type": "float",   "units": "%" }
+    ]
+}

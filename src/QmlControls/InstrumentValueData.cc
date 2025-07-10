@@ -347,7 +347,6 @@ QStringList InstrumentValueData::factGroupNames(void) const
         name[0] = name[0].toUpper();
     }
     groupNames.prepend(vehicleFactGroupName);
-    qDebug() << "DEBUG: Final factGroupNames (after prepend):" << groupNames; 
     return groupNames;
 }
 
