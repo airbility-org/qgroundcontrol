@@ -676,6 +676,9 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     case MAVLINK_MSG_ID_COMMAND_LONG:
         _handleCommandLong(message);
         break;
+    case MAVLINK_MSG_ID_TILT_ANGLE:
+        _handleEngineStatus(message);
+        break;
     }
 
     // This must be emitted after the vehicle processes the message. This way the vehicle state is up to date when anyone else
@@ -1613,6 +1616,16 @@ void Vehicle::_captureJoystick()
 QGeoCoordinate Vehicle::homePosition()
 {
     return _homePosition;
+}
+
+void Vehicle::sendCustomCommand()
+{
+    // Using DO_SET_MODE command temporalily
+    sendMavCommand(defaultComponentId(),
+        MAV_CMD_DO_SET_MODE,
+        true, //show error if fails
+        MAV_MODE_MANUAL_DISARMED
+    );
 }
 
 void Vehicle::setArmed(bool armed, bool showError)
@@ -2820,6 +2833,16 @@ void Vehicle::showCommandAckError(const mavlink_command_ack_t& ack)
             // Do nothing
             break;
         }
+}
+
+void Vehicle::_handleEngineStatus(mavlink_message_t& message)
+{
+    // Temporalily using an existing message instead an engine message
+    mavlink_tilt_angle_t tiltCtrl{};
+    mavlink_msg_tilt_angle_decode(&message, &tiltCtrl);
+
+    _engineStatus = tiltCtrl.tilt_fl;
+    emit engineStatusChanged(_engineStatus);
 }
 
 void Vehicle::_handleCommandAck(mavlink_message_t& message)
