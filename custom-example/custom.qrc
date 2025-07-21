@@ -14,6 +14,9 @@
         <file alias="vertical_speed.svg">res/Images/vertical_speed.svg</file>
         <file alias="dronecode-black.svg">res/Images/dronecode-black.svg</file>
         <file alias="dronecode-white.svg">res/Images/dronecode-white.svg</file>
+        <file alias="armed.png">res/Images/armed.png</file>
+        <file alias="running.png">res/Images/running.png</file>
+        <file alias="warning.png">res/Images/warning.png</file>
     </qresource>
     <qresource prefix="/qmlimages">
         <file alias="PaperPlane.svg">res/Images/CustomVehicleIcon.svg</file>
@@ -33,6 +36,7 @@
         <file alias="QGroundControl/FlightDisplay/CustomGuidedActionsController.qml">src/CustomGuidedActionsController.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlyViewCustomLayer.qml">src/FlyViewCustomLayer.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlyViewToolStripActionList.qml">src/FlyViewToolStripActionList.qml</file>
+        <file alias="QGroundControl/FlightDisplay/EngineStatusIndicator.qml">src/EngineStatusIndicator.qml</file>
     </qresource>
     <qresource prefix="/res">
         <file alias="QGCLogoFull.svg">res/QGCLogoFull.svg</file>

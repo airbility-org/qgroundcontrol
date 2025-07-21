@@ -255,4 +255,17 @@ Item {
             anchors.centerIn:   parent
         }
     }
+
+    Button {
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        height: ScreenTools.defaultFontPixelHeight * 6
+        width: height
+        visible: _activeVehicle
+        text: "Change Flight Mode to Manual"
+
+        onClicked: {
+            _activeVehicle.sendCustomCommand()
+        }
+    }
 }

@@ -19,13 +19,14 @@
 //-----------------------------------------------------------------------------
 CustomFirmwarePlugin::CustomFirmwarePlugin()
 {
-    for (auto &mode: _flightModeList){
-        //-- Narrow the flight mode options to only these
-        if(mode.mode_name != _holdFlightMode && mode.mode_name != _rtlFlightMode && mode.mode_name != _missionFlightMode){
-            // No other flight modes can be set
-            mode.canBeSet = false;
-        }
-    }
+    // for (auto &mode: _flightModeList){
+    //     //-- Narrow the flight mode options to only these
+    //     if(mode.mode_name != _holdFlightMode && mode.mode_name != _rtlFlightMode && mode.mode_name != _missionFlightMode){
+    //         // No other flight modes can be set
+    //         mode.canBeSet = false;
+    //     }
+    // }
+    // updateAvailableFlightModes(_flightModeList);
 }
 
 //-----------------------------------------------------------------------------
@@ -40,6 +41,9 @@ const QVariantList& CustomFirmwarePlugin::toolIndicators(const Vehicle* vehicle)
         // First call the base class to get the standard QGC list. This way we are guaranteed to always get
         // any new toolbar indicators which are added upstream in our custom build.
         _toolIndicatorList = FirmwarePlugin::toolIndicators(vehicle);
+        _toolIndicatorList.append(
+            QVariant::fromValue(QUrl::fromUserInput("qrc:/qml/QGroundControl/FlightDisplay/EngineStatusIndicator.qml"))
+        );
         // Then specifically remove the RC RSSI indicator.
         _toolIndicatorList.removeOne(QVariant::fromValue(QUrl::fromUserInput("qrc:/toolbar/RCRSSIIndicator.qml")));
     }
@@ -119,6 +123,8 @@ void CustomFirmwarePlugin::updateAvailableFlightModes(FlightModeList &modeList)
         case PX4CustomMode::AUTO_LOITER:
         case PX4CustomMode::AUTO_RTL:
         case PX4CustomMode::AUTO_MISSION:
+        case PX4CustomMode::MANUAL            :
+        case PX4CustomMode::STABILIZED        :
             mode.canBeSet = true;
             break;
         case PX4CustomMode::OFFBOARD          :
@@ -126,8 +132,6 @@ void CustomFirmwarePlugin::updateAvailableFlightModes(FlightModeList &modeList)
         case PX4CustomMode::POSCTL_ORBIT      :
         case PX4CustomMode::AUTO_FOLLOW_TARGET:
         case PX4CustomMode::AUTO_PRECLAND     :
-        case PX4CustomMode::MANUAL            :
-        case PX4CustomMode::STABILIZED        :
         case PX4CustomMode::ACRO              :
         case PX4CustomMode::RATTITUDE         :
         case PX4CustomMode::ALTCTL            :
