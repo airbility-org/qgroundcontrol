@@ -189,9 +189,9 @@ void ParameterManager::_handleParamValue(int componentId, const QString &paramet
     qCDebug(ParameterManagerVerbose1Log) << _logVehiclePrefix(componentId) <<
                                             "_parameterUpdate" <<
                                             "name:" << parameterName <<
-                                            "count:" << parameterCount <<
-                                            "index:" << parameterIndex <<
-                                            "mavType:" << mavParamType <<
+                                            "count:" << parameterCount << // 해당 컴포넌트의 총 파라미터 개수
+                                            "index:" << parameterIndex << // 현재 파라미터가 몇 번째 인덱스에 해당하는지
+                                            "mavType:" << mavParamType << // 파라미터 타입
                                             "value:" << parameterValue <<
                                             ")";
 
@@ -202,6 +202,8 @@ void ParameterManager::_handleParamValue(int componentId, const QString &paramet
         return;
     }
 
+    // QGC에서는 드론 연결 시 모든 파라미터 목록을 요청하고 (PARAM_REQUEST_LIST) 응답이 늦으면 타임아웃을 발생시키는데, 
+    // 파라미터 업데이트가 수신되면 이 타이머를 중지
     _initialRequestTimeoutTimer.stop();
 
     if (_vehicle->px4Firmware() && (parameterName == "_HASH_CHECK")) {
@@ -233,16 +235,19 @@ void ParameterManager::_handleParamValue(int componentId, const QString &paramet
     _waitingParamTimeoutTimer.stop();
 
     // Update our total parameter counts
+    // 아직 컴포넌트의 파라미터의 총 개수가 저장되지 않았다면
     if (!_paramCountMap.contains(componentId)) {
         _paramCountMap[componentId] = parameterCount;
-        _totalParamCount += parameterCount;
+        _totalParamCount += parameterCount; // 전체 파라미터 개수도 업데이트
     }
 
     // If we've never seen this component id before, setup the index wait lists.
+    // 아직 한 번도 파라미터를 수신한 적이 없는 새로운 컴포넌트라면 
     if (!_waitingReadParamIndexMap.contains(componentId)) {
         // Add all indices to the wait list, parameter index is 0-based
         for (int waitingIndex = 0; waitingIndex < parameterCount; waitingIndex++) {
             // This will add the new component id, as well as the the new waiting index and set the retry count for that index to 0
+            // 파라미터 대기 목록 초기화
             _waitingReadParamIndexMap[componentId][waitingIndex] = 0;
         }
 
@@ -304,6 +309,7 @@ void ParameterManager::_handleParamValue(int componentId, const QString &paramet
         qCDebug(ParameterManagerVerbose1Log) << _logVehiclePrefix(componentId) << "waitingWriteParamNameCount:" << waitingWriteParamNameCount;
     }
 
+    // 아직 기다리는 파라미터가 남아있다면 타이머 재시작
     const int readWaitingParamCount = waitingReadParamIndexCount + waitingReadParamNameCount;
     const int totalWaitingParamCount = readWaitingParamCount + waitingWriteParamNameCount;
     if (totalWaitingParamCount) {
@@ -320,13 +326,22 @@ void ParameterManager::_handleParamValue(int componentId, const QString &paramet
 
     _updateProgressBar();
 
+    // _mapCompId2FactMap을 업데이트하는 핵심 로직
     Fact *fact = nullptr;
+
+    // 이미 map에 저장된 파라미터라면
     if (_mapCompId2FactMap.contains(componentId) && _mapCompId2FactMap[componentId].contains(parameterName)) {
         fact = _mapCompId2FactMap[componentId][parameterName];
     } else {
         qCDebug(ParameterManagerVerbose1Log) << _logVehiclePrefix(componentId) << "Adding new fact" << parameterName;
 
+        // 새로운 파라미터라면 새로운 Fact 생성
         fact = new Fact(componentId, parameterName, mavTypeToFactType(mavParamType), this);
+
+        // Fact에 대한 메타데이터를 가져와 새로 생성한 Fact에 세팅해준다.
+        // 현재 기체의 ComponentInformationManager에서 현재 컴포넌트 아이디에 해당하는 CompInfoParam 객체를 가져온다.
+        // CompInfoParam은 해당 컴포넌트의 모든 파라미터 메타데이터를 관리하는 역할
+        // CompInfoParam에서 파라미터 이름으로 메타데이터를 찾아 가져온다. 
         FactMetaData *const factMetaData = _vehicle->compInfoManager()->compInfoParam(componentId)->factMetaDataForName(parameterName, fact->type());
         fact->setMetaData(factMetaData);
 

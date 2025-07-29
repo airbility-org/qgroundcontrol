@@ -259,6 +259,7 @@ QString CompInfoParam::_parameterMetaDataFile(Vehicle* vehicle, MAV_AUTOPILOT fi
     }
 }
 
+// metaDataFile -> 캐시할 파라미터 메타데이터 파일의 경로
 void CompInfoParam::_cachePX4MetaDataFile(const QString& metaDataFile)
 {
     FirmwarePlugin* plugin = _anyVehicleTypeFirmwarePlugin(MAV_AUTOPILOT_PX4);
@@ -277,6 +278,8 @@ void CompInfoParam::_cachePX4MetaDataFile(const QString& metaDataFile)
     qCDebug(CompInfoParamLog) << "ParameterManager::cacheMetaDataFile cacheHit file:firmware:major;minor" << cacheHit << cacheMajorVersion << cacheMinorVersion;
 
     bool cacheNewFile = false;
+
+    // 캐시된 파일이 없는 경우
     if (cacheHit.isEmpty()) {
         // No cache hits, store the new file
         cacheNewFile = true;
@@ -298,6 +301,7 @@ void CompInfoParam::_cachePX4MetaDataFile(const QString& metaDataFile)
 
         QSettings settings;
         QDir cacheDir = QFileInfo(settings.fileName()).dir();
+        // 캐시 파일명에는 접두사가 존재 (_cachedMetaDataFilePrefix)
         QFile cacheFile(cacheDir.filePath(QString("%1.%2.%3.xml").arg(_cachedMetaDataFilePrefix).arg(MAV_AUTOPILOT_PX4).arg(newMajorVersion)));
         qCDebug(CompInfoParamLog) << "ParameterManager::cacheMetaDataFile caching file:" << cacheFile.fileName();
         QFile newFile(metaDataFile);
