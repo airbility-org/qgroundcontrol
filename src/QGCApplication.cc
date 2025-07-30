@@ -319,6 +319,18 @@ void QGCApplication::init()
         qCWarning(QGCApplicationLog) << "Could not load /fonts/opensans-demibold font";
     }
 
+    if(QFontDatabase::addApplicationFont(":/custom/fonts/Pretendard-Light") < 0) {
+        qCWarning(QGCApplicationLog) << "Could not load custom/fonts/Pretendard-Light font";
+    }
+
+    if(QFontDatabase::addApplicationFont(":/custom/fonts/Pretendard-Regular") < 0) {
+        qCWarning(QGCApplicationLog) << "Could not load custom/fonts/Pretendard-Regular font";
+    }
+
+    if(QFontDatabase::addApplicationFont(":/custom/fonts/Pretendard-SemiBold") < 0) {
+        qCWarning(QGCApplicationLog) << "Could not load /custom/fonts/Pretendard-SemiBold font";
+    }
+
     // 애플리케이션 모드에 따른 초기화 분기
     if (_simpleBootTest) {
         // Since GStream builds are so problematic we initialize video during the simple boot test

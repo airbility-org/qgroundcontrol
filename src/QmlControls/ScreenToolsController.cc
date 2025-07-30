@@ -80,10 +80,10 @@ QString ScreenToolsController::normalFontFamily()
     //-- See App.SettinsGroup.json for index
     const int langID = SettingsManager::instance()->appSettings()->qLocaleLanguage()->rawValue().toInt();
     if (langID == QLocale::Korean) {
-        return QStringLiteral("NanumGothic");
+        return QStringLiteral("Pretendard");
     }
 
-    return QStringLiteral("Open Sans");
+    return QStringLiteral("Pretendard");
 }
 
 double ScreenToolsController::defaultFontDescent(int pointSize)
