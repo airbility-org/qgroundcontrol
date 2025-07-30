@@ -14,6 +14,8 @@
         <file alias="vertical_speed.svg">res/Images/vertical_speed.svg</file>
         <file alias="dronecode-black.svg">res/Images/dronecode-black.svg</file>
         <file alias="dronecode-white.svg">res/Images/dronecode-white.svg</file>
+        <file alias="airbility-black.png">res/Images/airbility-logo-black.png</file>
+        <file alias="airbility-white.png">res/Images/airbility-logo-white.png</file>
     </qresource>
     <qresource prefix="/qmlimages">
         <file alias="PaperPlane.svg">res/Images/CustomVehicleIcon.svg</file>
@@ -35,7 +37,7 @@
         <file alias="QGroundControl/FlightDisplay/FlyViewToolStripActionList.qml">src/FlyViewToolStripActionList.qml</file>
     </qresource>
     <qresource prefix="/res">
-        <file alias="QGCLogoFull.svg">res/QGCLogoFull.svg</file>
+        <file alias="QGCLogoFull.svg">res/AirbilityLogo.png</file>
         <file alias="qgroundcontrol.ico">res/icons/custom_qgroundcontrol.ico</file>
     </qresource>
     <qresource prefix="/custom/fonts">
