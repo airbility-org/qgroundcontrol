@@ -17,7 +17,6 @@ CustomTiltAngleFactGroup::CustomTiltAngleFactGroup(QObject* parent)
 void CustomTiltAngleFactGroup::handleMessage(Vehicle *vehicle, const mavlink_message_t &message) {
     switch (message.msgid) {
         case MAVLINK_MSG_ID_TILT_ANGLE: 
-            qDebug() << "Received MAVLINK_MSG_ID_TILT_ANGLE.";
             _handleTiltAngle(message);
             break;
             default:
