@@ -40,6 +40,7 @@ RowLayout {
         Layout.preferredWidth: contentWidth + vehicleMessagesIcon.width + control.spacing
         verticalAlignment:  Text.AlignVCenter
         text:               mainStatusText()
+        font.weight: Font.DemiBold
         font.pointSize:     ScreenTools.largeFontPointSize
 
         property string _commLostText:      qsTr("Comms Lost")
