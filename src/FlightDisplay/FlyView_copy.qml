@@ -29,7 +29,6 @@ import QGroundControl.Vehicle
 
 // 3D Viewer modules
 import Viewer3D
-import "qrc:/custom/qml/CustomComponent"
 
 Item { // FlyView의 최상위 컨테이너
     id: _root
@@ -86,16 +85,11 @@ Item { // FlyView의 최상위 컨테이너
         visible:    !QGroundControl.videoManager.fullScreen
     }
 
-    CustomLeftTab {
-        id: leftTabPanel
-        anchors.top: toolbar.bottom
-    }
-
     Item {
         id:                 mapHolder
         anchors.top:        toolbar.bottom
         anchors.bottom:     parent.bottom
-        anchors.left:       leftTabPanel.right
+        anchors.left:       parent.left
         anchors.right:      parent.right
         
         FlyViewMap { // 비행 지도 컴포넌트
