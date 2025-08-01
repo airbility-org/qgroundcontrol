@@ -51,5 +51,12 @@
     </qresource>
     <qresource prefix="/custom/qml">
         <file alias="CustomComponent/CustomTabToolbar.qml">src/CustomComponent/CustomTabToolbar.qml</file>
+        <file alias="CustomComponent/CustomRoundButton.qml">src/CustomComponent/CustomRoundButton.qml</file>
+    </qresource>
+    <qresource prefix="/custom/icon">
+        <file alias="Propulsion_power_ico.svg">res/Images/icon/Propulsion_power_ico.svg</file>
+        <file alias="Control_ico.svg">res/Images/icon/Control_ico.svg</file>
+        <file alias="General_ico.svg">res/Images/icon/General_ico.svg</file>
+        <file alias="Main_page_ico.svg">res/Images/icon/Main_page_ico.svg</file>
     </qresource>
 </RCC>
