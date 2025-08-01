@@ -50,6 +50,7 @@
         <file alias="Pretendard-SemiBold">res/fonts/Pretendard-SemiBold.otf</file>
     </qresource>
     <qresource prefix="/custom/qml">
+        <file alias="CustomComponent/CustomLeftTabButton.qml">src/CustomComponent/CustomLeftTabButton.qml</file>
         <file alias="CustomComponent/CustomTabToolbar.qml">src/CustomComponent/CustomTabToolbar.qml</file>
         <file alias="CustomComponent/CustomRoundButton.qml">src/CustomComponent/CustomRoundButton.qml</file>
     </qresource>
