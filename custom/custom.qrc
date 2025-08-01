@@ -50,6 +50,15 @@
         <file alias="Pretendard-SemiBold">res/fonts/Pretendard-SemiBold.otf</file>
     </qresource>
     <qresource prefix="/custom/qml">
+        <file alias="FlightStatus/PropulsionPowerTab.qml">src/FlightStatus/PropulsionPowerTab.qml</file>
+        <file alias="FlightStatus/ControlTab.qml">src/FlightStatus/ControlTab.qml</file>
+
+        <file alias="VehicleConfiguration/GeneralTab.qml">src/VehicleConfiguration/GeneralTab.qml</file>
+        <file alias="VehicleConfiguration/PropulsionPowerTab.qml">src/VehicleConfiguration/PropulsionPowerTab.qml</file>
+        <file alias="VehicleConfiguration/ControlTab.qml">src/VehicleConfiguration/ControlTab.qml</file>
+
+        <file alias="CustomComponent/CustomTabView.qml">src/CustomComponent/CustomTabView.qml</file>
+        <file alias="CustomComponent/CustomLeftTab.qml">src/CustomComponent/CustomLeftTab.qml</file>
         <file alias="CustomComponent/CustomLeftTabButton.qml">src/CustomComponent/CustomLeftTabButton.qml</file>
         <file alias="CustomComponent/CustomTabToolbar.qml">src/CustomComponent/CustomTabToolbar.qml</file>
         <file alias="CustomComponent/CustomRoundButton.qml">src/CustomComponent/CustomRoundButton.qml</file>

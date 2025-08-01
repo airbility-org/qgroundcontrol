@@ -23,6 +23,8 @@ import QGroundControl.FlightMap
 
 import QGroundControl.UTMSP
 
+import "qrc:/custom/qml/"
+
 /// @brief Native QML top level window
 /// All properties defined here are visible to all QML pages.
 // QtQuick.Window 모듈의 ApplicationWindow를 최상위 요소로 사용
@@ -97,6 +99,7 @@ ApplicationWindow {
 
         // Property to manage RemoteID quick access to settings page
         property bool               commingFromRIDIndicator:        false
+        property bool isInCustomTabView: false
     }
 
     /// Default color palette used throughout the UI
@@ -125,15 +128,30 @@ ApplicationWindow {
         return globals.validationErrorCount <= previousValidationErrorCount
     }
 
+    function showCustomTabView(initialIndex) {
+        flyView.visible = false
+        planView.visible = false
+
+        customTabViewLoader.initialIndex = initialIndex;
+        customTabViewLoader.visible = true;
+        customTabViewLoader.source = "qrc:/custom/qml/CustomComponent/CustomTabView.qml"
+
+        globals.isInCustomTabView = true
+    }
+ 
     function showPlanView() {
         flyView.visible = false
         planView.visible = true
         viewer3DWindow.close()
+        customTabViewLoader.visible = false
+        globals.isInCustomTabView = false
     }
 
     function showFlyView() {
         flyView.visible = true
         planView.visible = false
+        customTabViewLoader.visible = false;
+        globals.isInCustomTabView = false
     }
 
     function showTool(toolTitle, toolSource, toolIcon) {
@@ -290,6 +308,21 @@ ApplicationWindow {
         anchors.fill:   parent
         visible:        false // 초기에는 화면에 보이지 않고 FlyView가 보임
     }
+
+    Loader {
+        id: customTabViewLoader
+        anchors.fill: parent
+        visible: false
+
+        onLoaded: {
+            if(item) {
+                item.initialize(customTabViewLoader.initialIndex);
+            }
+        }
+
+        property int initialIndex: 0
+    }
+
 
     footer: LogReplayStatusBar {
         visible: QGroundControl.settingsManager.flyViewSettings.showLogReplayStatusBar.rawValue
