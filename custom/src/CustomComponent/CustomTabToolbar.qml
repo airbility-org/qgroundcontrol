@@ -18,21 +18,25 @@ Rectangle {
 
     Item {
         anchors.fill: parent
-        
+
         Image {
             id: airbility_logo
-            source: "qrc:/custom/img/airbility_small_logo.png"
+            source: "qrc:/custom/img/airbility_small_logo.svg"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: ScreenTools.defaultFontPointSize * 1
+            anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 1.5
+            width: ScreenTools.defaultFontPixelWidth * 3.2
+            fillMode: Image.PreserveAspectFit
         }
 
         Image {
             id: airbility_typo_logo
-            source: "qrc:/custom/img/airbility_typo_logo.png"
-            anchors.verticalCenter: parent.verticalCenter
+            source: "qrc:/custom/img/airbility_typo_logo_white.svg"
+            anchors.top:            parent.top
+            anchors.bottom:         parent.bottom
             anchors.right: parent.right
-            anchors.rightMargin: ScreenTools.defaultFontPointSize * 1
+            anchors.margins:        ScreenTools.defaultFontPixelHeight
+            fillMode: Image.PreserveAspectFit
         }
     }
     

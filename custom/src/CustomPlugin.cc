@@ -110,12 +110,12 @@ QGCOptions* CustomPlugin::options()
 
 QString CustomPlugin::brandImageIndoor(void) const
 {
-    return QStringLiteral("/custom/img/airbility-white.png");
+    return QStringLiteral("/custom/img/airbility_typo_logo_white.svg");
 }
 
 QString CustomPlugin::brandImageOutdoor(void) const
 {
-    return QStringLiteral("/custom/img/airbility-black.png");
+    return QStringLiteral("/custom/img/airbility_typo_logo_black.svg");
 }
 
 bool CustomPlugin::overrideSettingsGroupVisibility(const QString &name)
