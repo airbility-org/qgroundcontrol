@@ -134,6 +134,7 @@ ApplicationWindow {
 
         customTabViewLoader.initialIndex = initialIndex;
         customTabViewLoader.visible = true;
+        customTabViewLoader.source = "";
         customTabViewLoader.source = "qrc:/custom/qml/CustomComponent/CustomTabView.qml"
 
         globals.isInCustomTabView = true
