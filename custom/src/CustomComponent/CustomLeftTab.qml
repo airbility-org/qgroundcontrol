@@ -33,7 +33,7 @@ Rectangle {
             font.pixelSize: 20
 
             Layout.leftMargin: ScreenTools.defaultFontPointSize * 2.5
-            Layout.topMargin: ScreenTools.defaultFontPointSize * 1
+            Layout.topMargin: ScreenTools.defaultFontPointSize * 2
         }
 
         // 구분선
@@ -41,7 +41,7 @@ Rectangle {
             width: parent.width
             height: 1 // 선의 두께
             color: "#848484"
-            Layout.topMargin: ScreenTools.defaultFontPointSize * 0.1
+            Layout.topMargin: ScreenTools.defaultFontPixelHeight
             Layout.bottomMargin: ScreenTools.defaultFontPointSize * 0.1
         }
 
@@ -83,7 +83,7 @@ Rectangle {
             color: "white"
             font.pixelSize: 20
             Layout.leftMargin: ScreenTools.defaultFontPointSize * 2.5
-            Layout.topMargin: ScreenTools.defaultFontPointSize * 1
+            Layout.topMargin: ScreenTools.defaultFontPointSize * 5
         }
 
         // 구분선
@@ -91,7 +91,7 @@ Rectangle {
             width: parent.width
             height: 1
             color: "#6c6c6c"
-            Layout.topMargin: ScreenTools.defaultFontPointSize * 0.1
+            Layout.topMargin: ScreenTools.defaultFontPixelHeight
             Layout.bottomMargin: ScreenTools.defaultFontPointSize * 0.1
         }
 
@@ -140,13 +140,27 @@ Rectangle {
             }
         }
 
-        CustomRoundButton {
-            iconSource: "qrc:/custom/icon/Main_page_ico.svg"
-            labelText: "Main"
-            visible: globals.isInCustomTabView
+        Item {
+            Layout.fillHeight: true
+        }
 
-            onClicked: {
-                mainWindow.showFlyView()
+        // CustomRoundButton과 그 마진을 포함하는 컨테이너
+        Item {
+            id: bottomContainer
+            Layout.fillWidth: true
+            Layout.preferredHeight: mainPageButton.implicitHeight
+            Layout.bottomMargin: ScreenTools.defaultFontPointSize * 5
+
+            CustomRoundButton {
+                id: mainPageButton
+                anchors.centerIn: parent
+                iconSource: "qrc:/custom/icon/Main_page_ico.svg"
+                labelText: "Main"
+                visible: globals.isInCustomTabView
+                
+                onClicked: {
+                    mainWindow.showFlyView()
+                }
             }
         }
     }

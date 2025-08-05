@@ -17,9 +17,9 @@ Rectangle {
     radius: 29.5
     border.color: "#1de9b6"
     border.width: ScreenTools.defaultFontPixelWidth * 0.1
-    Layout.topMargin: ScreenTools.defaultFontPointSize * 1
-    Layout.leftMargin: ScreenTools.defaultFontPointSize * 1
-    Layout.bottomMargin: ScreenTools.defaultFontPointSize * 1
+    //Layout.topMargin: ScreenTools.defaultFontPointSize * 1
+    //Layout.leftMargin: ScreenTools.defaultFontPointSize * 1
+    //Layout.bottomMargin: ScreenTools.defaultFontPointSize * 1
 
     color: {
         if (mouseArea.containsMouse) {
@@ -30,16 +30,14 @@ Rectangle {
     }
 
     RowLayout {
-        anchors.fill: parent
-        anchors.leftMargin: ScreenTools.defaultFontPixelWidth
+        anchors.centerIn: parent
         spacing: ScreenTools.defaultFontPixelWidth
 
         Image {
             id: iconImage
             source: control.iconSource
             Layout.preferredWidth: ScreenTools.defaultFontPixelWidth * 1.5
-            Layout.preferredHeight: ScreenTools.defaultFontPixelWidth * 1.5
-            Layout.leftMargin: ScreenTools.defaultFontPointSize * 0.3
+            // Layout.leftMargin: ScreenTools.defaultFontPointSize * 0.3
             fillMode: Image.PreserveAspectFit
 
             ColorOverlay {
@@ -56,6 +54,7 @@ Rectangle {
         }
 
         Label {
+            id: mainLabel
             text: control.labelText
             font.family: "Pretendard"
             font.pointSize: 12
