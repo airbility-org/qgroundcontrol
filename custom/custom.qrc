@@ -19,6 +19,19 @@
         <file alias="airbility_typo_logo_white.svg">res/Images/airbility_typo_logo_white.svg</file>
         <file alias="airbility_typo_logo_black.svg">res/Images/airbility_typo_logo_black.svg</file>
         <file alias="gcs_position.svg">res/Images/gcs_position.svg</file>
+        <file alias="vehicle_map.svg">res/Images/vehicle_map.svg</file>
+
+        <file alias="vehicle/tilt_0.svg">res/Images/vehicle/tilt_0.svg</file>
+        <file alias="vehicle/tilt_30.svg">res/Images/vehicle/tilt_30.svg</file>
+        <file alias="vehicle/tilt_60.svg">res/Images/vehicle/tilt_60.svg</file>
+        <file alias="vehicle/tilt_90.svg">res/Images/vehicle/tilt_90.svg</file>
+        <file alias="vehicle/aileron_l.svg">res/Images/vehicle/aileron_l.svg</file>
+        <file alias="vehicle/aileron_r.svg">res/Images/vehicle/aileron_r.svg</file>
+        <file alias="vehicle/rudder_l.svg">res/Images/vehicle/rudder_l.svg</file>
+        <file alias="vehicle/rudder_r.svg">res/Images/vehicle/rudder_r.svg</file>
+
+        <file alias="vehicle/vehicle_graphic.svg">res/Images/vehicle/vehicle_graphic.svg</file>
+    </qresource>
     <qresource prefix="/qmlimages">
         <file alias="PaperPlane.svg">res/Images/CustomVehicleIcon.svg</file>
     </qresource>
@@ -50,6 +63,7 @@
     <qresource prefix="/custom/qml">
         <file alias="FlightStatus/PropulsionPowerTab.qml">src/FlightStatus/PropulsionPowerTab.qml</file>
         <file alias="FlightStatus/ControlTab.qml">src/FlightStatus/ControlTab.qml</file>
+        <file alias="FlightStatus/AirframeView.qml">src/FlightStatus/AirframeView.qml</file>
 
         <file alias="VehicleConfiguration/GeneralTab.qml">src/VehicleConfiguration/GeneralTab.qml</file>
         <file alias="VehicleConfiguration/PropulsionPowerTab.qml">src/VehicleConfiguration/PropulsionPowerTab.qml</file>
