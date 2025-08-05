@@ -17,8 +17,12 @@ import QGroundControl
 import QGroundControl.Controls
 import QGroundControl.Palette
 import QGroundControl.ScreenTools
+import QGroundControl.FlightMap
+import QGroundControl.FlightDisplay
 
 import Custom.Widgets
+import "qrc:/custom/qml"
+
 
 Item {
     property var parentToolInsets                       // These insets tell you what screen real estate is available for positioning the controls in your overlay
@@ -53,21 +57,26 @@ Item {
         return hours+':'+minutes+':'+seconds;
     }
 
+    // left~ & right~ : 가로 방향 여백, top~ & bottom~ : 세로 방향 여백
     QGCToolInsets {
         id:                     _totalToolInsets
-        leftEdgeTopInset:       parentToolInsets.leftEdgeTopInset
-        leftEdgeCenterInset:    exampleRectangle.leftEdgeCenterInset
-        leftEdgeBottomInset:    parentToolInsets.leftEdgeBottomInset
-        rightEdgeTopInset:      parentToolInsets.rightEdgeTopInset
-        rightEdgeCenterInset:   parentToolInsets.rightEdgeCenterInset
-        rightEdgeBottomInset:   parent.width - compassBackground.x
-        topEdgeLeftInset:       parentToolInsets.topEdgeLeftInset
-        topEdgeCenterInset:     compassArrowIndicator.y + compassArrowIndicator.height
+        leftEdgeTopInset:       parentToolInsets.leftEdgeTopInset // 왼쪽 가장자리 상단 여백
+        leftEdgeCenterInset:    exampleRectangle.leftEdgeCenterInset // 왼쪽 가장자리 중앙 여백
+        leftEdgeBottomInset:    parentToolInsets.leftEdgeBottomInset + customTelemetryWidget.width // 왼쪽 가장자리 아래 여백
+        rightEdgeTopInset:      parentToolInsets.rightEdgeTopInset // 오른쪽 가장자리 상단 여백
+        rightEdgeCenterInset:   parentToolInsets.rightEdgeCenterInset // 오른쪽 가장자리 중앙 여백
+        rightEdgeBottomInset:   parentToolInsets.rightEdgeBottomInset
+        // rightEdgeBottomInset:   parent.width - compassBackground.x
+        topEdgeLeftInset:       parentToolInsets.topEdgeLeftInset // 위쪽 가장자리 왼쪽
+        topEdgeCenterInset:     parentToolInsets.topEdgeCenterInset // 위쪽 가장자리 중앙
+        // topEdgeCenterInset:     compassArrowIndicator.y + compassArrowIndicator.height // 위쪽 가장자리 중앙
         topEdgeRightInset:      parentToolInsets.topEdgeRightInset
-        bottomEdgeLeftInset:    parentToolInsets.bottomEdgeLeftInset
-        bottomEdgeCenterInset:  parentToolInsets.bottomEdgeCenterInset
-        bottomEdgeRightInset:   parent.height - attitudeIndicator.y
+        bottomEdgeLeftInset:    parentToolInsets.bottomEdgeLeftInset + instrumentPanel.height + customTelemetryWidget.height
+        bottomEdgeCenterInset:  parentToolInsets.bottomEdgeCenterInset + customTelemetryWidget.height
+        bottomEdgeRightInset:   parentToolInsets.bottomEdgeRightInset // 아래쪽 가장자리 오른쪽 
+        // bottomEdgeRightInset:   parent.height - attitudeIndicator.y
     }
+
 
     // This is an example of how you can use parent tool insets to position an element on the custom fly view layer
     // - we use parent topEdgeLeftInset to position the widget below the toolstrip
@@ -91,6 +100,8 @@ Item {
 
     //-------------------------------------------------------------------------
     //-- Heading Indicator
+
+    /**
     Rectangle {
         id:                         compassBar
         height:                     ScreenTools.defaultFontPixelHeight * 1.5
@@ -132,6 +143,7 @@ Item {
             }
         }
     }
+
     Rectangle {
         id:                         headingIndicator
         height:                     ScreenTools.defaultFontPixelHeight
@@ -255,4 +267,34 @@ Item {
             anchors.centerIn:   parent
         }
     }
+    **/
+
+    CustomTelemetryWidget {
+        id: customTelemetryWidget
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: ScreenTools.defaultFontPixelHeight
+        anchors.bottomMargin: ScreenTools.defaultFontPixelWidth
+        // visible: _activeVehicle
+        height: mainWindow.height * 0.2
+    }
+
+    FlyViewInstrumentPanel {
+        id: instrumentPanel
+        anchors.left: parent.left
+        anchors.bottom: customTelemetryWidget.top
+        anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 2
+        anchors.bottomMargin: ScreenTools.defaultFontPixelWidth * 2
+    }
+
+    FlyViewInsetViewer {
+            id:                     widgetLayerInsetViewer
+            anchors.top:            parent.top
+            anchors.bottom:         parent.bottom
+            anchors.left:           parent.left
+            anchors.right:          parent.right
+            // z:                      widgetLayer.z + 1
+            insetsToView:           _totalToolInsets
+            visible:                false
+        }
 }
