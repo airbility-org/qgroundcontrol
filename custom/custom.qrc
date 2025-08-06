@@ -64,6 +64,7 @@
         <file alias="FlightStatus/PropulsionPowerTab.qml">src/FlightStatus/PropulsionPowerTab.qml</file>
         <file alias="FlightStatus/ControlTab.qml">src/FlightStatus/ControlTab.qml</file>
         <file alias="FlightStatus/AirframeView.qml">src/FlightStatus/AirframeView.qml</file>
+        <file alias="FlightStatus/TiltAnimation.qml">src/FlightStatus/TiltAnimation.qml</file>
 
         <file alias="VehicleConfiguration/GeneralTab.qml">src/VehicleConfiguration/GeneralTab.qml</file>
         <file alias="VehicleConfiguration/PropulsionPowerTab.qml">src/VehicleConfiguration/PropulsionPowerTab.qml</file>

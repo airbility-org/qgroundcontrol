@@ -17,7 +17,7 @@ import "qrc:/custom/qml/FlightStatus"
 Item {
     id: aircraftRoot
     property var _activeVehicle: QGroundControl.multiVehicleManager.activeVehicle
-    
+
     function getColorByAngle(tiltAngle) {
         if(tiltAngle >= 100 || tiltAngle <= -100) {
             return "#E91D20"
@@ -92,8 +92,7 @@ Item {
         anchors.left: fuselageImage.left
         anchors.topMargin: fuselageImage.height * 0.15
         anchors.leftMargin: fuselageImage.width * 0.3
-        angle: _activeVehicle.vehicle.heading.value
-        //angle: _activeVehicle.tiltAngle.tiltFl.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltFl.value
+        angle: _activeVehicle.tiltAngle.tiltFl.value
     }
 
     TiltAnimation {
@@ -104,8 +103,7 @@ Item {
         anchors.right: fuselageImage.right
         anchors.topMargin: fuselageImage.height * 0.15
         anchors.rightMargin: fuselageImage.width * 0.3
-        angle: _activeVehicle.vehicle.heading.value
-        //angle: _activeVehicle.tiltAngle.tiltFr.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltFr.value
+        angle: _activeVehicle.tiltAngle.tiltFr.value
     }
 
     TiltAnimation {
@@ -116,8 +114,7 @@ Item {
         anchors.left: fuselageImage.left
         anchors.bottomMargin: fuselageImage.height * 0.25
         anchors.leftMargin: fuselageImage.width * 0.3
-        angle: _activeVehicle.vehicle.heading.value
-        //angle: _activeVehicle.tiltAngle.tiltRl.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltRl.value
+        angle: _activeVehicle.tiltAngle.tiltRl.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltRl.value
     }
 
     TiltAnimation {
@@ -128,61 +125,52 @@ Item {
         anchors.right: fuselageImage.right
         anchors.bottomMargin: fuselageImage.height * 0.25
         anchors.rightMargin: fuselageImage.width * 0.3
-        angle: _activeVehicle.vehicle.heading.value
-        //angle: _activeVehicle.tiltAngle.tiltRr.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltRr.value
+        angle: _activeVehicle.tiltAngle.tiltRr.value
     }
 
     Label {
         id: tiltFLValue
-        //text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFl.value.toFixed(2) : "--") + " º"
-        text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
-        //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
+        text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFl.value.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
         font.pointSize: 30
         anchors.top: tiltFLAnimation.top
         anchors.right: tiltFLAnimation.left
         // anchors.right: tiltFLOverLay.left
         anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByAngle(_activeVehicle.vehicle.heading.value)
+        color: aircraftRoot.getColorByAngle(_activeVehicle.tiltAngle.tiltFl.value)
     }
 
     Label {
         id: tiltFRValue
-        //text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
-        text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
-        //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
+        text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
         font.pointSize: 30
         anchors.top: tiltFRAnimation.top
         anchors.left: tiltFRAnimation.right
         anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByAngle(_activeVehicle.vehicle.heading.value)
+        color: aircraftRoot.getColorByAngle(_activeVehicle.tiltAngle.tiltFr.value)
     }
 
     Label {
         id: tiltRLValue
-        //text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltRl.value.toFixed(2) : "--") + " º"
-        text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
-        //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
+        text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltRl.value.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
         font.pointSize: 30
         anchors.top: tiltRLAnimation.top
         anchors.right: tiltRLAnimation.left
         anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByAngle(_activeVehicle.vehicle.heading.value)
+        color: aircraftRoot.getColorByAngle(_activeVehicle.tiltAngle.tiltRl.value)
     }
 
     Label {
         id: tiltRRValue
-        //text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltRr.value.toFixed(2) : "--") + " º"
-        text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
-        //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
+        text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltRr.value.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
         font.pointSize: 30
         anchors.top: tiltRRAnimation.top
         anchors.left: tiltRRAnimation.right
         anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByAngle(_activeVehicle.vehicle.heading.value)
+        color: aircraftRoot.getColorByAngle(_activeVehicle.tiltAngle.tiltRr.value)
     }
 
     Item {
