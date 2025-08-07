@@ -14,7 +14,5 @@ Rectangle {
         anchors.fill: parent
         anchors.topMargin: ScreenTools.defaultFontPixelWidth * 10
         anchors.bottomMargin: ScreenTools.defaultFontPixelWidth * 10
-        anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 25
-        anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 25
     }
 }

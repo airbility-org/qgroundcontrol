@@ -32,6 +32,10 @@ Item {
         fillMode: Image.PreserveAspectFit
     }
 
+    
+    property real actualImageVerticalOffset: (fuselageImage.height - fuselageImage.paintedHeight) / 2
+    property real actualImageHorizontalOffset: (fuselageImage.width - fuselageImage.paintedWidth) / 2
+
     Image {
         id: aileronLImage
         source: "qrc:/custom/img/vehicle/aileron_l.svg"
@@ -86,48 +90,48 @@ Item {
 
     TiltAnimation {
         id: tiltFLAnimation
-        width: fuselageImage.width * 0.1
-        height: fuselageImage.width * 0.1
+        width: fuselageImage.paintedWidth * 0.15
+        height: fuselageImage.paintedWidth * 0.15
         anchors.top: fuselageImage.top
         anchors.left: fuselageImage.left
-        anchors.topMargin: fuselageImage.height * 0.15
-        anchors.leftMargin: fuselageImage.width * 0.3
+        anchors.topMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.1
+        anchors.leftMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
         angle: _activeVehicle.vehicle.heading.value
         //angle: _activeVehicle.tiltAngle.tiltFl.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltFl.value
     }
 
     TiltAnimation {
         id: tiltFRAnimation
-        width: fuselageImage.width * 0.1
-        height: fuselageImage.width * 0.1
+        width: fuselageImage.paintedWidth * 0.15
+        height: fuselageImage.paintedWidth * 0.15
         anchors.top: fuselageImage.top
         anchors.right: fuselageImage.right
-        anchors.topMargin: fuselageImage.height * 0.15
-        anchors.rightMargin: fuselageImage.width * 0.3
+        anchors.topMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.1
+        anchors.rightMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
         angle: _activeVehicle.vehicle.heading.value
         //angle: _activeVehicle.tiltAngle.tiltFr.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltFr.value
     }
 
     TiltAnimation {
         id: tiltRLAnimation
-        width: fuselageImage.width * 0.1
-        height: fuselageImage.width * 0.1
+        width: fuselageImage.paintedWidth * 0.15
+        height: fuselageImage.paintedWidth * 0.15
         anchors.bottom: fuselageImage.bottom
         anchors.left: fuselageImage.left
-        anchors.bottomMargin: fuselageImage.height * 0.25
-        anchors.leftMargin: fuselageImage.width * 0.3
+        anchors.bottomMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.2
+        anchors.leftMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
         angle: _activeVehicle.vehicle.heading.value
         //angle: _activeVehicle.tiltAngle.tiltRl.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltRl.value
     }
 
     TiltAnimation {
         id: tiltRRAnimation
-        width: fuselageImage.width * 0.1
-        height: fuselageImage.width * 0.1
+        width: fuselageImage.paintedWidth * 0.15
+        height: fuselageImage.paintedWidth * 0.15
         anchors.bottom: fuselageImage.bottom
         anchors.right: fuselageImage.right
-        anchors.bottomMargin: fuselageImage.height * 0.25
-        anchors.rightMargin: fuselageImage.width * 0.3
+        anchors.bottomMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.2
+        anchors.rightMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
         angle: _activeVehicle.vehicle.heading.value
         //angle: _activeVehicle.tiltAngle.tiltRr.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltRr.value
     }
@@ -138,10 +142,9 @@ Item {
         text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
         //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
-        font.pointSize: 30
+        font.pointSize: customScreenTools.fontSize4
         anchors.top: tiltFLAnimation.top
         anchors.right: tiltFLAnimation.left
-        // anchors.right: tiltFLOverLay.left
         anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 3
         color: getColorByAngle(_activeVehicle.vehicle.heading.value)
     }
@@ -152,7 +155,7 @@ Item {
         text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
         //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
-        font.pointSize: 30
+        font.pointSize: customScreenTools.fontSize4
         anchors.top: tiltFRAnimation.top
         anchors.left: tiltFRAnimation.right
         anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 3
@@ -165,7 +168,7 @@ Item {
         text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
         //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
-        font.pointSize: 30
+        font.pointSize: customScreenTools.fontSize4
         anchors.top: tiltRLAnimation.top
         anchors.right: tiltRLAnimation.left
         anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 3
@@ -178,7 +181,7 @@ Item {
         text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
         //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
-        font.pointSize: 30
+        font.pointSize: customScreenTools.fontSize4
         anchors.top: tiltRRAnimation.top
         anchors.left: tiltRRAnimation.right
         anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 3
@@ -196,7 +199,7 @@ Item {
                 id: aileronLLabel
                 text: "L - Aileron"
                 font.family: "Pretendard"
-                font.pointSize: 15
+                font.pointSize: customScreenTools.fontSize2
                 color: "white"
             }
 
@@ -204,7 +207,7 @@ Item {
                 id: aileronLValue
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFl.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
-                font.pointSize: 15
+                font.pointSize: customScreenTools.fontSize3
                 color: "white"
             }
         }
@@ -221,7 +224,7 @@ Item {
                 id: aileronRLabel
                 text: "R - Aileron"
                 font.family: "Pretendard"
-                font.pointSize: 15
+                font.pointSize: customScreenTools.fontSize2
                 color: "white"
             }
 
@@ -229,7 +232,7 @@ Item {
                 id: aileronRValue
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
-                font.pointSize: 15
+                font.pointSize: customScreenTools.fontSize3
                 color: "white"
             }
         }
@@ -245,7 +248,7 @@ Item {
                 id: rudderLLabel
                 text: "L - Rudder"
                 font.family: "Pretendard"
-                font.pointSize: 15
+                font.pointSize: customScreenTools.fontSize2
                 color: "white"
             }
 
@@ -253,7 +256,7 @@ Item {
                 id: rudderLValue
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
-                font.pointSize: 15
+                font.pointSize: customScreenTools.fontSize3
                 color: "white"
             }
         }
@@ -271,7 +274,7 @@ Item {
                 id: rudderRLabel
                 text: "R - Rudder"
                 font.family: "Pretendard"
-                font.pointSize: 15
+                font.pointSize: customScreenTools.fontSize2
                 color: "white"
             }
 
@@ -279,10 +282,9 @@ Item {
                 id: rudderRValue
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
-                font.pointSize: 15
+                font.pointSize: customScreenTools.fontSize3
                 color: "white"
             }
         }
     }
 }
-
