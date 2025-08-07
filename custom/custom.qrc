@@ -75,7 +75,9 @@
         <file alias="CustomComponent/CustomTabView.qml">src/CustomComponent/CustomTabView.qml</file>
         <file alias="CustomComponent/CustomTabToolbar.qml">src/CustomComponent/CustomTabToolbar.qml</file>
         <file alias="CustomComponent/CustomRoundButton.qml">src/CustomComponent/CustomRoundButton.qml</file>
-        <file alias="CustomTelemetryWidget.qml">src/CustomComponent/CustomTelemetryWidget.qml</file>
+        <file alias="CustomComponent/CustomTelemetryWidget.qml">src/CustomComponent/CustomTelemetryWidget.qml</file>
+
+        <file alias="CustomScreenTools.qml">src/CustomScreenTools.qml</file>
     </qresource>
     <qresource prefix="/custom/icon">
         <file alias="Propulsion_power_ico.svg">res/Images/icon/Propulsion_power_ico.svg</file>
