@@ -105,6 +105,8 @@ ApplicationWindow {
     /// Default color palette used throughout the UI
     QGCPalette { id: qgcPal; colorGroupEnabled: true }
 
+    CustomScreenTools { id: customScreenTools }
+
     //-------------------------------------------------------------------------
     //-- Actions
 

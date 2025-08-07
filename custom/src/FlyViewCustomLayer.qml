@@ -21,7 +21,7 @@ import QGroundControl.FlightMap
 import QGroundControl.FlightDisplay
 
 import Custom.Widgets
-import "qrc:/custom/qml"
+import "qrc:/custom/qml/CustomComponent"
 
 
 Item {
@@ -274,9 +274,7 @@ Item {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.leftMargin: ScreenTools.defaultFontPixelHeight
-        anchors.bottomMargin: ScreenTools.defaultFontPixelWidth
-        // visible: _activeVehicle
-        height: mainWindow.height * 0.2
+        anchors.bottomMargin: ScreenTools.defaultFontPixelHeight
     }
 
     FlyViewInstrumentPanel {

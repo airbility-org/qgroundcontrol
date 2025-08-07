@@ -11,10 +11,16 @@ import QGroundControl.ScreenTools
 import QGroundControl.Controllers
 
 import QtQuick.Shapes
+import "qrc:/custom/qml"
+import "qrc:/custom/qml/CustomComponent"
 
 Rectangle {
     id: customTelemetryWidget
-    width: mainWindow.width * 0.4
+    property int externalParentWidth: parent.width
+    property int externalParnetHeight: parent.height
+
+    width: 750 * customScreenTools.defaultWidthRatio
+    height: 200 * customScreenTools.defaultHeightRatio
     color: Qt.rgba(0, 0, 0, 0.56) 
     radius: 10
 
@@ -25,6 +31,14 @@ Rectangle {
         anchors.fill:       parent
     }
 
+/**
+    CustomScreenTools {
+        id: customScreenTools
+        currentWidth: externalParentWidth
+        currentHeight: externalParnetHeight
+    }
+    **/
+
     Item {
         id: speedSection
         anchors.left: parent.left
@@ -33,24 +47,23 @@ Rectangle {
 
         Row {
             id: headerRow
-            spacing: ScreenTools.defaultFontPixelWidth
+            spacing: customScreenTools.fontSize2
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top // 세로 위치도 지정해줍니다.
-            anchors.topMargin: ScreenTools.defaultFontPixelWidth * 2
+            anchors.top: parent.top
+            anchors.topMargin: customScreenTools.fontSize2
 
             Image {
                 id: speedIcon
                 source: "qrc:/custom/icon/Speed_ico.svg"
                 fillMode: Image.PreserveAspectFit
-                // 이미지의 크기를 명시적으로 지정
-                width: ScreenTools.defaultFontPixelHeight * 1.2
+                width: customScreenTools.fontSize2 * 1.3
             }
 
             Text {
                 id: speedLabel
                 text: "SPEED"
                 font.family: "Pretendard SemiBold"
-                font.pointSize: 13
+                font.pointSize: customScreenTools.fontSize2
                 color: "white"
             }
         }
@@ -60,61 +73,17 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: headerRow.bottom
-            anchors.margins: ScreenTools.defaultFontPixelWidth * 2
-            spacing: ScreenTools.defaultFontPixelWidth
-
-            Row {
-                spacing: ScreenTools.defaultFontPixelWidth
-
-                Text {
-                    id: airspeedLabel
-                    text: "Airspeed"
-                    font.family: "Pretendard"
-                    font.pointSize: 10
-                    color: "white"
-                }
-
-                Text {
-                    id: airspeedValue
-                    text: _activeVehicle ? _activeVehicle.vehicle.airSpeed.valueString : "--" 
-                    font.family: "Pretendard SemiBold"
-                    color: "white"
-                    font.pointSize: 12
-                }
-                Text {
-                    id: airspeedUnit
-                    text: "m/s"
-                    font.family: "Pretendard"
-                    color: "white"
-                    font.pointSize: 10
-                }
+            anchors.margins: customScreenTools.fontSize2
+            spacing: customScreenTools.fontSize1
+            
+            CustomFactValueRowComponent {
+                labelText: "Airspeed"
+                fact: _activeVehicle.vehicle.airSpeed
             }
 
-            Row {
-                spacing: ScreenTools.defaultFontPixelWidth
-
-                Text {
-                    id: groundSpeedLabel
-                    text: "Ground Speed"
-                    font.family: "Pretendard"
-                    font.pointSize: 10
-                    color: "white"
-                }
-
-                Text {
-                    id: groundSpeedValue
-                    text: _activeVehicle ? _activeVehicle.vehicle.groundSpeed.valueString : "--" 
-                    font.family: "Pretendard SemiBold"
-                    color: "white"
-                    font.pointSize: valuePointSize
-                }
-                Text {
-                    id: groundSpeedUnit
-                    text: "m/s"
-                    font.family: "Pretendard"
-                    color: "white"
-                    font.pointSize: 10
-                }
+            CustomFactValueRowComponent {
+                labelText: "Ground Speed"
+                fact: _activeVehicle.vehicle.groundSpeed
             }
         }
     }
@@ -125,25 +94,25 @@ Rectangle {
         width: parent.width / 3
         height: parent.height
 
-        Row {
+        RowLayout {
             id: positionRow
-            spacing: ScreenTools.defaultFontPixelWidth
+            spacing: customScreenTools.fontSize2
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top // 세로 위치도 지정해줍니다.
-            anchors.topMargin: ScreenTools.defaultFontPixelWidth * 2
+            anchors.topMargin: customScreenTools.fontSize2
 
             Image {
                 id: positionIcon
                 source: "qrc:/custom/icon/Position_ico.svg"
                 fillMode: Image.PreserveAspectFit
-                width: ScreenTools.defaultFontPixelHeight * 1.2
+                width: customScreenTools.fontSize2 * 1.2
             }
 
             Text {
                 id: positionLabel
                 text: "POSITION"
                 font.family: "Pretendard SemiBold"
-                font.pointSize: 13
+                font.pointSize: customScreenTools.fontSize2
                 color: "white"
             }
         }
@@ -153,63 +122,17 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: positionRow.bottom
-            anchors.margins: ScreenTools.defaultFontPixelWidth * 2
-            spacing: ScreenTools.defaultFontPixelWidth
+            anchors.margins: customScreenTools.fontSize2
+            spacing: customScreenTools.fontSize1
 
-            Row {
-                spacing: ScreenTools.defaultFontPixelWidth
-                Text {
-                    id: latitudeLabel
-                    text: "Latitude"
-                    font.family: "Pretendard"
-                    font.pointSize: 10
-                    color: "white"
-                }
-
-                Text {
-                    id: latitudeValue
-                    text: _activeVehicle ? _activeVehicle.gps.lat.valueString : "--" 
-                    font.family: "Pretendard SemiBold"
-                    color: "white"
-                    font.pointSize: valuePointSize
-                }
-                /**
-                Text {
-                    id: longitudeUnit
-                    text: "m/s"
-                    font.family: "Pretendard"
-                    color: "white"
-                    font.pointSize: 10
-                }
-                **/
+            CustomFactValueRowComponent {
+                labelText: "Latitude"
+                fact: _activeVehicle.gps.lat
             }
 
-            Row {
-                spacing: ScreenTools.defaultFontPixelWidth
-                Text {
-                    id: longitudeLabel
-                    text: "Longitude"
-                    font.family: "Pretendard"
-                    font.pointSize: 10
-                    color: "white"
-                }
-
-                Text {
-                    id: longitudeValue
-                    text: _activeVehicle ? _activeVehicle.gps.lon.valueString : "--" 
-                    font.family: "Pretendard SemiBold"
-                    color: "white"
-                    font.pointSize: valuePointSize
-                }
-                /**
-                Text {
-                    id: longitudeUnit
-                    text: "m/s"
-                    font.family: "Pretendard"
-                    color: "white"
-                    font.pointSize: 10
-                }
-                **/
+            CustomFactValueRowComponent {
+                labelText: "Longitude"
+                fact: _activeVehicle.gps.lon
             }
         }
     }
@@ -222,23 +145,23 @@ Rectangle {
 
         Row {
             id: heightRow
-            spacing: ScreenTools.defaultFontPixelWidth
+            spacing: customScreenTools.fontSize2
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top // 세로 위치도 지정해줍니다.
-            anchors.topMargin: ScreenTools.defaultFontPixelWidth * 2
+            anchors.topMargin: customScreenTools.fontSize2
 
             Image {
                 id: heightIcon
                 source: "qrc:/custom/icon/Height_ico.svg"
                 fillMode: Image.PreserveAspectFit
-                width: ScreenTools.defaultFontPixelHeight * 1.2
+                width: customScreenTools.fontSize2 * 1.2
             }
 
             Text {
                 id: heightLabel
                 text: "HEIGHT"
                 font.family: "Pretendard SemiBold"
-                font.pointSize: 13
+                font.pointSize: customScreenTools.fontSize2
                 color: "white"
             }
          }
@@ -248,147 +171,19 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: heightRow.bottom
-            anchors.margins: ScreenTools.defaultFontPixelWidth * 2
-            spacing: ScreenTools.defaultFontPixelWidth
+            anchors.margins: customScreenTools.fontSize2
+            spacing: customScreenTools.fontSize1
 
-            Row {
-                spacing: ScreenTools.defaultFontPixelWidth
-                Text {
-                    id: aglLabel
-                    text: "AGL"
-                    font.family: "Pretendard"
-                    font.pointSize: 10
-                    color: "white"
-                }
-
-                Text {
-                    id: aglValue
-                    text: _activeVehicle ? _activeVehicle.vehicle.airSpeed.valueString : "--" 
-                    font.family: "Pretendard SemiBold"
-                    color: "white"
-                    font.pointSize: valuePointSize
-                }
-                Text {
-                    id: aglUnit
-                    text: "m"
-                    font.family: "Pretendard"
-                    color: "white"
-                    font.pointSize: 10
-                }
+            CustomFactValueRowComponent {
+                labelText: "AGL"
+                fact: _activeVehicle.vehicle.airSpeed
             }
 
-            Row {
-                spacing: ScreenTools.defaultFontPixelWidth
-                Text {
-                    id: mslLabel
-                    text: "MSL"
-                    font.family: "Pretendard"
-                    font.pointSize: 10
-                    color: "white"
-                }
-
-                Text {
-                    id: mslValue
-                    text: _activeVehicle ? _activeVehicle.vehicle.altitudeAMSL.valueString : "--" 
-                    font.family: "Pretendard SemiBold"
-                    color: "white"
-                    font.pointSize: valuePointSize
-                }
-                Text {
-                    id: mslUnit
-                    text: "m"
-                    font.family: "Pretendard"
-                    color: "white"
-                    font.pointSize: 10
-                }
+            CustomFactValueRowComponent {
+                labelText: "MSL"
+                fact: _activeVehicle.vehicle.altitudeAMSL
             }
         }
     }
 }
 
-
-/**
-        Item {
-            id: groundSpeedData
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: airspeedUnit.bottom
-            anchors.topMargin: ScreenTools.defaultFontPixelWidth
-
-            Text {
-                id: groundSpeedLabel
-                text: "Ground Speed"
-                font.family: "Pretendard"
-                font.pointSize: 10
-                color: "white"
-
-                anchors.left: parent.left
-                anchors.leftMargin: ScreenTools.defaultFontPixelWidth
-            }
-
-            Text {
-                id: groundSpeedValue
-                text: _activeVehicle ? _activeVehicle.vehicle.airSpeed.valueString : "--" 
-                font.family: "Pretendard SemiBold"
-                color: "white"
-                font.pointSize: 12
-
-                anchors.right: groundSpeedUnit.left
-                anchors.rightMargin: ScreenTools.defaultFontPixelWidth
-                anchors.bottom: groundSpeedUnit.bottom
-            }
-
-            Text {
-                id: groundSpeedUnit
-                text: "m/s"
-                font.family: "Pretendard"
-                color: "white"
-                font.pointSize: 10
-
-                anchors.right: parent.right
-                anchors.rightMargin: ScreenTools.defaultFontPixelWidth
-            }
-        }
-        Row {
-            anchors.top: headerRow.bottom
-            anchors.topMargin: ScreenTools.defaultFontPixelHeight * 1.5
-            anchors.left: parent.left 
-            anchors.leftMargin: ScreenTools.defaultFontPixelHeight
-            
-            Text {
-                id: airspeedLabel
-                text: "Airspeed"
-                font.family: "Pretendard"
-                font.pointSize: 10
-                color: "white"
-            }
-
-            Item {
-                width: speedSection.width - airspeedLabel.width - airspeedValue.width - airspeedUnit.width
-                height: 1
-            }
-
-            Text {
-                id: airspeedValue
-                text: _activeVehicle.vehicle.altitudeAMSL.valueString
-                font.family: "Pretendard SemiBold"
-                color: "white"
-                font.pointSize: 12
-
-            }
-
-            Text {
-                id: airspeedUnit
-                text: "m/s"
-                font.family: "Pretendard"
-                color: "white"
-                font.pointSize: 10
-            }
-        }
-        **/
-/**
-_activeVehicle.airSpeed
-_activeVehicle.groundSpeed
-_activeVehicle.altitude.altitudeRelative
-_activeVehicle.altitude.altitudeAMSL
-**/
