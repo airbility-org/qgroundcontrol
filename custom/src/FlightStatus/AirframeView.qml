@@ -17,12 +17,14 @@ import "qrc:/custom/qml/FlightStatus"
 Item {
     id: aircraftRoot
     property var _activeVehicle: QGroundControl.multiVehicleManager.activeVehicle
+
+    property bool isAileronAngleOutlier: _activeVehicle.vehicle.heading.value >= 100 || _activeVehicle.vehicle.heading.value <= -100
     
-    function getColorByAngle(tiltAngle) {
+    function getColorByTiltAngle(tiltAngle) {
         if(tiltAngle >= 100 || tiltAngle <= -100) {
-            return "#E91D20"
+            return customPal.warnColor
         }
-        return "white"
+        return customPal.normalColor
     }
 
     Image {
@@ -45,7 +47,8 @@ Item {
         ColorOverlay {
             anchors.fill: parent
             source: aileronLImage
-            color: "#ACACAC"
+            color: customPal.lightGray
+            visible: isAileronAngleOutlier
         }
     }
 
@@ -58,7 +61,7 @@ Item {
         ColorOverlay {
             anchors.fill: parent
             source: aileronRImage
-            color: "#ACACAC"
+            color: customPal.lightGray
         }
     }
 
@@ -71,7 +74,7 @@ Item {
         ColorOverlay {
             anchors.fill: parent
             source: rudderLImage
-            color: "#ACACAC"
+            color: customPal.lightGray
         }
     }
 
@@ -84,7 +87,8 @@ Item {
         ColorOverlay {
             anchors.fill: parent
             source: rudderRImage
-            color: "#ACACAC"
+            color: customPal.lightGray
+            visible: isAileronAngleOutlier
         }
     }
 
@@ -96,7 +100,7 @@ Item {
         anchors.left: fuselageImage.left
         anchors.topMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.1
         anchors.leftMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
-        angle: _activeVehicle.vehicle.heading.value
+        angle: _activeVehicle ? _activeVehicle.vehicle.heading.value : 0
         //angle: _activeVehicle.tiltAngle.tiltFl.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltFl.value
     }
 
@@ -108,7 +112,7 @@ Item {
         anchors.right: fuselageImage.right
         anchors.topMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.1
         anchors.rightMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
-        angle: _activeVehicle.vehicle.heading.value
+        angle: _activeVehicle ? _activeVehicle.vehicle.heading.value : 0
         //angle: _activeVehicle.tiltAngle.tiltFr.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltFr.value
     }
 
@@ -120,7 +124,7 @@ Item {
         anchors.left: fuselageImage.left
         anchors.bottomMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.2
         anchors.leftMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
-        angle: _activeVehicle.vehicle.heading.value
+        angle: _activeVehicle ? _activeVehicle.vehicle.heading.value : 0
         //angle: _activeVehicle.tiltAngle.tiltRl.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltRl.value
     }
 
@@ -132,7 +136,7 @@ Item {
         anchors.right: fuselageImage.right
         anchors.bottomMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.2
         anchors.rightMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
-        angle: _activeVehicle.vehicle.heading.value
+        angle: _activeVehicle ? _activeVehicle.vehicle.heading.value : 0
         //angle: _activeVehicle.tiltAngle.tiltRr.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltRr.value
     }
 
@@ -146,7 +150,7 @@ Item {
         anchors.top: tiltFLAnimation.top
         anchors.right: tiltFLAnimation.left
         anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByAngle(_activeVehicle.vehicle.heading.value)
+        color: getColorByTiltAngle(_activeVehicle.vehicle.heading.value)
     }
 
     Label {
@@ -159,7 +163,7 @@ Item {
         anchors.top: tiltFRAnimation.top
         anchors.left: tiltFRAnimation.right
         anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByAngle(_activeVehicle.vehicle.heading.value)
+        color: getColorByTiltAngle(_activeVehicle.vehicle.heading.value)
     }
 
     Label {
@@ -172,7 +176,7 @@ Item {
         anchors.top: tiltRLAnimation.top
         anchors.right: tiltRLAnimation.left
         anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByAngle(_activeVehicle.vehicle.heading.value)
+        color: getColorByTiltAngle(_activeVehicle.vehicle.heading.value)
     }
 
     Label {
@@ -185,7 +189,7 @@ Item {
         anchors.top: tiltRRAnimation.top
         anchors.left: tiltRRAnimation.right
         anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByAngle(_activeVehicle.vehicle.heading.value)
+        color: getColorByTiltAngle(_activeVehicle.vehicle.heading.value)
     }
 
     Item {
@@ -200,7 +204,7 @@ Item {
                 text: "L - Aileron"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
-                color: "white"
+                color: customPal.normalColor
             }
 
             Label {
@@ -208,7 +212,7 @@ Item {
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFl.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: "white"
+                color: customPal.normalColor
             }
         }
     }
@@ -225,7 +229,7 @@ Item {
                 text: "R - Aileron"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
-                color: "white"
+                color: customPal.normalColor
             }
 
             Label {
@@ -233,7 +237,7 @@ Item {
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: "white"
+                color: customPal.normalColor
             }
         }
     }
@@ -249,7 +253,7 @@ Item {
                 text: "L - Rudder"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
-                color: "white"
+                color: customPal.normalColor
             }
 
             Label {
@@ -257,7 +261,7 @@ Item {
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: "white"
+                color: customPal.normalColor
             }
         }
     }
@@ -275,7 +279,7 @@ Item {
                 text: "R - Rudder"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
-                color: "white"
+                color: customPal.normalColor
             }
 
             Label {
@@ -283,7 +287,7 @@ Item {
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: "white"
+                color: customPal.normalColor
             }
         }
     }

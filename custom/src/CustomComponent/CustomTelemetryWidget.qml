@@ -31,14 +31,6 @@ Rectangle {
         anchors.fill:       parent
     }
 
-/**
-    CustomScreenTools {
-        id: customScreenTools
-        currentWidth: externalParentWidth
-        currentHeight: externalParnetHeight
-    }
-    **/
-
     Item {
         id: speedSection
         anchors.left: parent.left
@@ -78,12 +70,12 @@ Rectangle {
             
             CustomFactValueRowComponent {
                 labelText: "Airspeed"
-                fact: _activeVehicle.vehicle.airSpeed
+                fact: _activeVehicle ? _activeVehicle.vehicle.airSpeed : undefined
             }
 
             CustomFactValueRowComponent {
                 labelText: "Ground Speed"
-                fact: _activeVehicle.vehicle.groundSpeed
+                fact: _activeVehicle ? _activeVehicle.vehicle.groundSpeed : undefined
             }
         }
     }
@@ -127,12 +119,12 @@ Rectangle {
 
             CustomFactValueRowComponent {
                 labelText: "Latitude"
-                fact: _activeVehicle.gps.lat
+                fact: _activeVehicle ? _activeVehicle.gps.lat : undefined
             }
 
             CustomFactValueRowComponent {
                 labelText: "Longitude"
-                fact: _activeVehicle.gps.lon
+                fact: _activeVehicle ? _activeVehicle.gps.lon : undefined
             }
         }
     }
@@ -176,12 +168,12 @@ Rectangle {
 
             CustomFactValueRowComponent {
                 labelText: "AGL"
-                fact: _activeVehicle.vehicle.airSpeed
+                fact: _activeVehicle ? _activeVehicle.vehicle.airSpeed : undefined
             }
 
             CustomFactValueRowComponent {
                 labelText: "MSL"
-                fact: _activeVehicle.vehicle.altitudeAMSL
+                fact: _activeVehicle ? _activeVehicle.vehicle.altitudeAMSL : undefined
             }
         }
     }
