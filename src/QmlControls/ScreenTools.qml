@@ -30,8 +30,8 @@ Item {
 
     //-- The point and pixel font size values are computed at runtime
 
-    property real defaultFontPointSize:     10
-    property real platformFontPointSize:    10
+    property real defaultFontPointSize:     11
+    property real platformFontPointSize:    11
 
     readonly property real smallFontPointRatio:      0.75
     readonly property real mediumFontPointRatio:     1.25
@@ -40,7 +40,7 @@ Item {
     /// You can use these properties to position ui elements in a screen resolution independent manner. Using fixed positioning values should not
     /// be done. All positioning should be done using anchors or a ratio of the defaultFontPixelHeight and defaultFontPixelWidth values. This way
     /// your ui elements will reposition themselves appropriately on varying screen sizes and resolutions.
-    property real defaultFontPixelHeight:   10
+    property real defaultFontPixelHeight:   11
     property real largeFontPixelHeight:     defaultFontPixelHeight * largeFontPointRatio
     property real mediumFontPixelHeight:    defaultFontPixelHeight * mediumFontPointRatio
     property real smallFontPixelHeight:     defaultFontPixelHeight * smallFontPointRatio
@@ -48,7 +48,7 @@ Item {
     /// You can use these properties to position ui elements in a screen resolution independent manner. Using fixed positioning values should not
     /// be done. All positioning should be done using anchors or a ratio of the defaultFontPixelHeight and defaultFontPixelWidth values. This way
     /// your ui elements will reposition themselves appropriately on varying screen sizes and resolutions.
-    property real defaultFontPixelWidth:    10
+    property real defaultFontPixelWidth:    11
     property real largeFontPixelWidth:      defaultFontPixelWidth * largeFontPointRatio
     property real mediumFontPixelWidth:     defaultFontPixelWidth * mediumFontPointRatio
     property real smallFontPixelWidth:      defaultFontPixelWidth * smallFontPointRatio
@@ -59,9 +59,9 @@ Item {
     /// The default amount of space in between controls in a dialog
     property real defaultDialogControlSpacing: defaultFontPixelHeight / 2
 
-    property real smallFontPointSize:       10
-    property real mediumFontPointSize:      10
-    property real largeFontPointSize:       10
+    property real smallFontPointSize:       11
+    property real mediumFontPointSize:      11
+    property real largeFontPointSize:       11
 
     property real toolbarHeight:            0
 
