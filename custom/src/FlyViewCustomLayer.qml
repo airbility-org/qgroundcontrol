@@ -273,8 +273,8 @@ Item {
         id: customTelemetryWidget
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        anchors.leftMargin: ScreenTools.defaultFontPixelHeight
-        anchors.bottomMargin: ScreenTools.defaultFontPixelHeight
+        anchors.leftMargin: ScreenTools.defaultFontPixelHeight * 0.3
+        anchors.bottomMargin: ScreenTools.defaultFontPixelHeight * 0.3
     }
 
     FlyViewInstrumentPanel {

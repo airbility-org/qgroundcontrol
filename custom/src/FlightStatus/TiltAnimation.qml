@@ -29,11 +29,11 @@ Item {
 
     function getColorByAngle() {
         if(isAngleOutlier) {
-            return "#E91D20"
+            return customPal.warnColor
         } else if(isAngleNegative) {
-            return "#ACACAC"
+            return customPal.lightGray
         } else {
-            return "white"
+            return customPal.normalColor
         }
     }
 

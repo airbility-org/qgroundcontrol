@@ -6,26 +6,23 @@ import QGroundControl.ScreenTools
 import Qt5Compat.GraphicalEffects
 
 Rectangle {
-    id: control
+    id: roundButton
     property url iconSource: ""
     property string labelText: ""
     
     signal clicked()
 
     width: ScreenTools.defaultFontPixelWidth * 11
-    height: ScreenTools.defaultFontPixelWidth * 4
+    height: ScreenTools.defaultFontPixelWidth * 5
     radius: 29.5
-    border.color: "#1de9b6"
-    border.width: ScreenTools.defaultFontPixelWidth * 0.1
-    //Layout.topMargin: ScreenTools.defaultFontPointSize * 1
-    //Layout.leftMargin: ScreenTools.defaultFontPointSize * 1
-    //Layout.bottomMargin: ScreenTools.defaultFontPointSize * 1
+    border.color: customPal.pointColor
+    border.width: 1.5
 
     color: {
         if (mouseArea.containsMouse) {
-            return "#1de9b6"
+            return customPal.pointColor
         } else {
-            "#292929"
+            customPal.darkGray
         }
     }
 
@@ -35,7 +32,7 @@ Rectangle {
 
         Image {
             id: iconImage
-            source: control.iconSource
+            source: roundButton.iconSource
             Layout.preferredWidth: ScreenTools.defaultFontPixelWidth * 1.5
             // Layout.leftMargin: ScreenTools.defaultFontPointSize * 0.3
             fillMode: Image.PreserveAspectFit
@@ -45,9 +42,9 @@ Rectangle {
                 source: parent
                 color: {
                     if (mouseArea.containsMouse) {
-                        return "#292929";
+                        return customPal.darkGray
                     } else {
-                        return "#ffffff";
+                        return customPal.normalColor
                     }
                 }
             }
@@ -55,18 +52,17 @@ Rectangle {
 
         Label {
             id: mainLabel
-            text: control.labelText
+            text: roundButton.labelText
             font.family: "Pretendard"
             font.pointSize: 12
             color: {
                 if (mouseArea.containsMouse) {
-                    return "#292929"
+                    return customPal.darkGray
                 } else {
-                    "white"
+                    return customPal.normalColor
                 }
             }
         }
-
     }
     
     MouseArea {
@@ -74,6 +70,6 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
 
-        onClicked: control.clicked()
+        onClicked: roundButton.clicked()
     }
 }
