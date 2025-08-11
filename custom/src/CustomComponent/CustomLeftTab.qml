@@ -11,6 +11,8 @@ Rectangle {
     property int currentTabIndex: 0
     property var contentLoader
 
+    signal toggleClicked()
+
     width: ScreenTools.defaultFontPixelWidth * 25
     color: "#292929"
     anchors.left: parent.left
@@ -141,25 +143,41 @@ Rectangle {
         }
 
         Item {
-            Layout.fillHeight: true
+            Layout.fillHeight: true // 남는 세로 공간을 모두 차지
         }
 
         // CustomRoundButton과 그 마진을 포함하는 컨테이너
         Item {
             id: bottomContainer
             Layout.fillWidth: true
+            // 버튼 높이를 기준으로 아이템 높이 설정
             Layout.preferredHeight: mainPageButton.implicitHeight
             Layout.bottomMargin: ScreenTools.defaultFontPointSize * 5
 
             CustomRoundButton {
                 id: mainPageButton
-                anchors.centerIn: parent
                 iconSource: "qrc:/custom/icon/Main_page_ico.svg"
                 labelText: "Main"
+
+                anchors.right: customToggleButton.left
+                anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 2
+                anchors.verticalCenter: parent.verticalCenter
                 visible: globals.isInCustomTabView
                 
                 onClicked: {
                     mainWindow.showFlyView()
+                }
+            }
+
+            CustomToggleButton {
+                id: customToggleButton
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.rightMargin: ScreenTools.defaultFontPointSize * 2
+                isOpened: true
+
+                onClicked: {
+                    toggleClicked()
                 }
             }
         }

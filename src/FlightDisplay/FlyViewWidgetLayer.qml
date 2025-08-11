@@ -28,6 +28,8 @@ import QGroundControl.Palette
 import QGroundControl.ScreenTools
 import QGroundControl.Vehicle
 
+import "qrc:/custom/qml/CustomComponent"
+
 // This is the ui overlay layer for the widgets/tools for Fly View
 Item {
     id: _root
@@ -54,6 +56,8 @@ Item {
     property bool   _showSingleVehicleUI:   true
 
     property bool utmspActTrigger
+
+    signal toggleClicked()
 
     QGCToolInsets {
         id:                     _totalToolInsets
@@ -172,11 +176,19 @@ Item {
         }
     }
 
+    property alias toggleComponent: toggleComponent
+
+    CustomToggleComponent {
+        id: toggleComponent
+        visible: false
+        onButtonClicked: toggleClicked()
+    }
+
     FlyViewToolStrip {
         id:                     toolStrip
         anchors.leftMargin:     _toolsMargin + parentToolInsets.leftEdgeCenterInset
         anchors.topMargin:      _toolsMargin + parentToolInsets.topEdgeLeftInset
-        anchors.left:           parent.left
+        anchors.left:           toggleComponent.visible ? toggleComponent.right : parent.left
         anchors.top:            parent.top
         z:                      QGroundControl.zOrderWidgets
         maxHeight:              parent.height - y - parentToolInsets.bottomEdgeLeftInset - _toolsMargin

@@ -77,8 +77,11 @@
         <file alias="CustomComponent/CustomRoundButton.qml">src/CustomComponent/CustomRoundButton.qml</file>
         <file alias="CustomComponent/CustomTelemetryWidget.qml">src/CustomComponent/CustomTelemetryWidget.qml</file>
         <file alias="CustomComponent/CustomFactValueRowComponent.qml">src/CustomComponent/CustomFactValueRowComponent.qml</file>
+        <file alias="CustomComponent/CustomToggleButton.qml">src/CustomComponent/CustomToggleButton.qml</file>
+        <file alias="CustomComponent/CustomToggleComponent.qml">src/CustomComponent/CustomToggleComponent.qml</file>
 
-        <file alias="CustomScreenTools.qml">src/CustomScreenTools.qml</file>
+        <file alias="QmlControls/CustomScreenTools.qml">src/QmlControls/CustomScreenTools.qml</file>
+        <file alias="QmlControls/CustomPalette.qml">src/QmlControls/CustomPalette.qml</file>
     </qresource>
     <qresource prefix="/custom/icon">
         <file alias="Propulsion_power_ico.svg">res/Images/icon/Propulsion_power_ico.svg</file>
@@ -88,5 +91,7 @@
         <file alias="Speed_ico.svg">res/Images/icon/Speed_ico.svg</file>
         <file alias="Position_ico.svg">res/Images/icon/Position_ico.svg</file>
         <file alias="Height_ico.svg">res/Images/icon/Height_ico.svg</file>
+        <file alias="Toggle_open_ico.svg">res/Images/icon/Toggle_open_ico.svg</file>
+        <file alias="Toggle_close_ico.svg">res/Images/icon/Toggle_close_ico.svg</file>
     </qresource>
 </RCC>

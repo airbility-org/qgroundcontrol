@@ -66,6 +66,16 @@ Item { // FlyView의 최상위 컨테이너
     property real   _fullItemZorder:    0
     property real   _pipItemZorder:     QGroundControl.zOrderWidgets
 
+    property bool isLeftTabVisible: true
+
+    Connections {
+        target: widgetLayer
+        onToggleClicked: {
+            isLeftTabVisible = true         // LeftTab 보이기
+            widgetLayer.toggleComponent.visible = false // Toggle 버튼 숨기기
+        }
+    }
+
     function _calcCenterViewPort() {
         var newToolInset = Qt.rect(0, 0, width, height)
         toolstrip.adjustToolInset(newToolInset)
@@ -89,13 +99,18 @@ Item { // FlyView의 최상위 컨테이너
     CustomLeftTab {
         id: leftTabPanel
         anchors.top: toolbar.bottom
+        visible: isLeftTabVisible
+        onToggleClicked: {
+            isLeftTabVisible = false        // LeftTab 숨김
+            widgetLayer.toggleComponent.visible = true // Toggle 버튼 보이기
+        }
     }
 
     Item {
         id:                 mapHolder
         anchors.top:        toolbar.bottom
         anchors.bottom:     parent.bottom
-        anchors.left:       leftTabPanel.right
+        anchors.left:       leftTabPanel.visible ? leftTabPanel.right : parent.left
         anchors.right:      parent.right
         
         FlyViewMap { // 비행 지도 컴포넌트

@@ -37,6 +37,24 @@ Item {
         id: leftTabPanel
         contentLoader: mainContentLoader
         anchors.top: toolbar.bottom
+        visible: parent.width > 800
+
+        onToggleClicked: {
+            leftTabPanel.visible = false        // LeftTab 숨김
+            toggleComponent.visible = true // Toggle 버튼 보이기
+        }
+    }
+
+    CustomToggleComponent {
+        id: toggleComponent
+        anchors.top: toolbar.bottom
+        z: QGroundControl.zOrderTopMost
+
+        visible: false
+        onButtonClicked: {
+            leftTabPanel.visible = true
+            toggleComponent.visible = false
+        }
     }
 
     // 동적 콘텐츠 영역
@@ -44,7 +62,7 @@ Item {
         id: mainContentLoader
         Layout.fillWidth: true
         Layout.fillHeight: true
-        anchors.left: leftTabPanel.right
+        anchors.left: leftTabPanel.visible ? leftTabPanel.right : parent.left
         anchors.right: parent.right
         anchors.top: toolbar.bottom
         anchors.bottom: parent.bottom
