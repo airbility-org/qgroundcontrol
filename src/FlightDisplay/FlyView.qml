@@ -69,11 +69,27 @@ Item { // FlyView의 최상위 컨테이너
     property bool isLeftTabVisible: true
 
     Connections {
-        target: widgetLayer
-        onToggleClicked: {
-            isLeftTabVisible = true         // LeftTab 보이기
-            widgetLayer.toggleComponent.visible = false // Toggle 버튼 숨기기
+        target: leftTabPanel
+        onCloseToggleRequested: {
+            _closeCustomLeftTab()
         }
+    }
+
+    Connections {
+        target: widgetLayer
+        onOpenToggleRequested: {
+            _openCustomLeftTab()
+        }
+    }
+
+    function _openCustomLeftTab() {
+        isLeftTabVisible = true
+        widgetLayer.toggleComponent.visible = false
+    }
+
+    function _closeCustomLeftTab() {
+        isLeftTabVisible = false
+        widgetLayer.toggleComponent.visible = true
     }
 
     function _calcCenterViewPort() {
@@ -100,10 +116,6 @@ Item { // FlyView의 최상위 컨테이너
         id: leftTabPanel
         anchors.top: toolbar.bottom
         visible: isLeftTabVisible
-        onToggleClicked: {
-            isLeftTabVisible = false        // LeftTab 숨김
-            widgetLayer.toggleComponent.visible = true // Toggle 버튼 보이기
-        }
     }
 
     Item {

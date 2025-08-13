@@ -57,7 +57,9 @@ Item {
 
     property bool utmspActTrigger
 
-    signal toggleClicked()
+    property alias toggleComponent: toggleComponent
+
+    signal openToggleRequested()
 
     QGCToolInsets {
         id:                     _totalToolInsets
@@ -176,12 +178,10 @@ Item {
         }
     }
 
-    property alias toggleComponent: toggleComponent
-
     CustomToggleComponent {
         id: toggleComponent
         visible: false
-        onButtonClicked: toggleClicked()
+        onToggleClicked: openToggleRequested()
     }
 
     FlyViewToolStrip {

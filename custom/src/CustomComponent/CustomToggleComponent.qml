@@ -7,7 +7,7 @@ Item {
     width: toggleButton.width * 1.4
     height: width
     
-    signal buttonClicked()
+    signal toggleClicked()
 
     Rectangle {
         anchors.fill: parent
@@ -20,7 +20,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
 
-            onClicked: buttonClicked()
+            onClicked: toggleClicked()
         }
     }
 }

@@ -11,7 +11,7 @@ Rectangle {
     property int currentTabIndex: 0
     property var contentLoader
 
-    signal toggleClicked()
+    signal closeToggleRequested()
 
     width: ScreenTools.defaultFontPixelWidth * 25
     color: "#292929"
@@ -177,7 +177,7 @@ Rectangle {
                 isOpened: true
 
                 onClicked: {
-                    toggleClicked()
+                    closeToggleRequested()
                 }
             }
         }

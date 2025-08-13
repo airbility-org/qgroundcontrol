@@ -39,9 +39,9 @@ Item {
         anchors.top: toolbar.bottom
         visible: parent.width > 800
 
-        onToggleClicked: {
-            leftTabPanel.visible = false        // LeftTab 숨김
-            toggleComponent.visible = true // Toggle 버튼 보이기
+        onCloseToggleRequested: {
+            leftTabPanel.visible = false
+            toggleComponent.visible = true
         }
     }
 
@@ -51,7 +51,7 @@ Item {
         z: QGroundControl.zOrderTopMost
 
         visible: false
-        onButtonClicked: {
+        onToggleClicked: {
             leftTabPanel.visible = true
             toggleComponent.visible = false
         }
