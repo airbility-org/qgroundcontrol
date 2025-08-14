@@ -7,7 +7,7 @@ import "qrc:/custom/qml/FlightStatus"
 
 Rectangle {
     id: flightStatus_control
-    color: "#000000"
+    color: qgcPal.windowShadeDark
 
     // 기체 형상 
     AirframeView {

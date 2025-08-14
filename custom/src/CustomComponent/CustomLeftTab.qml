@@ -14,7 +14,7 @@ Rectangle {
     signal closeToggleRequested()
 
     width: ScreenTools.defaultFontPixelWidth * 25
-    color: "#292929"
+    color: qgcPal.window
     anchors.left: parent.left
     anchors.bottom: parent.bottom
 
@@ -31,7 +31,7 @@ Rectangle {
             font.family: "Pretendard"
             font.weight: Font.DemiBold
             text: "Flight Status"
-            color: "white"
+            color: qgcPal.text
             font.pixelSize: 20
 
             Layout.leftMargin: ScreenTools.defaultFontPointSize * 2.5
@@ -82,7 +82,7 @@ Rectangle {
             font.family: "Pretendard"
             font.weight: Font.DemiBold
             text: "Vehicle\nConfiguration"
-            color: "white"
+            color: qgcPal.text
             font.pixelSize: 20
             Layout.leftMargin: ScreenTools.defaultFontPointSize * 2.5
             Layout.topMargin: ScreenTools.defaultFontPointSize * 5
@@ -92,7 +92,7 @@ Rectangle {
         Rectangle {
             width: parent.width
             height: 1
-            color: "#6c6c6c"
+            color: "#848484"
             Layout.topMargin: ScreenTools.defaultFontPixelHeight
             Layout.bottomMargin: ScreenTools.defaultFontPointSize * 0.1
         }

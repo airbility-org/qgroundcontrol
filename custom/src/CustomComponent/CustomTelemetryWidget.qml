@@ -21,11 +21,13 @@ Rectangle {
 
     width: 750 * customScreenTools.defaultWidthRatio
     height: 200 * customScreenTools.defaultHeightRatio
-    color: Qt.rgba(0, 0, 0, 0.56) 
+    color: qgcPal.window
     radius: 10
 
     property int valuePointSize: 13
     property var _activeVehicle: QGroundControl.multiVehicleManager.activeVehicle
+
+    QGCPalette { id: qgcPal; colorGroupEnabled: enabled }
 
     DeadMouseArea {
         anchors.fill:       parent
@@ -49,6 +51,12 @@ Rectangle {
                 source: "qrc:/custom/icon/Speed_ico.svg"
                 fillMode: Image.PreserveAspectFit
                 width: customScreenTools.fontSize2 * 1.3
+
+                ColorOverlay {
+                    anchors.fill: parent
+                    source: speedIcon
+                    color: qgcPal.text
+                }
             }
 
             Text {
@@ -56,7 +64,7 @@ Rectangle {
                 text: "SPEED"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize2
-                color: "white"
+                color: qgcPal.text
             }
         }
 
@@ -98,6 +106,12 @@ Rectangle {
                 source: "qrc:/custom/icon/Position_ico.svg"
                 fillMode: Image.PreserveAspectFit
                 width: customScreenTools.fontSize2 * 1.2
+
+                ColorOverlay {
+                    anchors.fill: parent
+                    source: positionIcon
+                    color: qgcPal.text
+                }
             }
 
             Text {
@@ -105,7 +119,7 @@ Rectangle {
                 text: "POSITION"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize2
-                color: "white"
+                color: qgcPal.text
             }
         }
 
@@ -147,6 +161,12 @@ Rectangle {
                 source: "qrc:/custom/icon/Height_ico.svg"
                 fillMode: Image.PreserveAspectFit
                 width: customScreenTools.fontSize2 * 1.2
+                
+                ColorOverlay {
+                    anchors.fill: parent
+                    source: speedIcon
+                    color: qgcPal.text
+                }
             }
 
             Text {
@@ -154,7 +174,7 @@ Rectangle {
                 text: "HEIGHT"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize2
-                color: "white"
+                color: qgcPal.text
             }
          }
 

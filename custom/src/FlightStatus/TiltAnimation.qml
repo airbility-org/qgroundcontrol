@@ -15,8 +15,7 @@ import QGroundControl.Controllers
 Item {
     id: tiltAnim
 
-    property real angle: -90
-    property int angleIncrement: 5 
+    property real angle: 0
     property real defaultRadius: width * 0.5 // 기준 반지름
 
     readonly property real progress: Math.abs(angle) / 90
@@ -29,33 +28,13 @@ Item {
 
     function getColorByAngle() {
         if(isAngleOutlier) {
-            return customPal.warnColor
+            return qgcPal.warningText
         } else if(isAngleNegative) {
             return customPal.lightGray
         } else {
-            return customPal.normalColor
+            return qgcPal.text
         }
     }
-
-/**
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
-            tiltAnim.angle += tiltAnim.angleIncrement
-        
-            // 각도가 90도를 넘어가면 감소 방향으로 전환
-            if (tiltAnim.angle >= 90) {
-                tiltAnim.angleIncrement = -5
-            } 
-            // 각도가 -90도보다 작아지면 증가 방향으로 전환
-            else if (tiltAnim.angle <= -90) {
-                tiltAnim.angleIncrement = 5
-            }
-        }
-    }
-    **/
 
     Canvas {
         id: ellipseCanvas

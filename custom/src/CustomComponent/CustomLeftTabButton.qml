@@ -21,9 +21,9 @@ Button {
     background: Rectangle {
         color: {
             if (control.active || control.hovered) {
-                return "#000000";
+                return qgcPal.buttonHighlight;
             } else {
-                return "#292929";
+                return qgcPal.window;
             }
         }
         
@@ -51,9 +51,9 @@ Button {
                     source: parent
                     color: {
                         if (control.active || control.hovered) {
-                            return "#1de9b6";
+                            return qgcPal.buttonHighlightText;
                         } else {
-                            return "#ffffff";
+                            return qgcPal.buttonText;
                         }
                     }
                 }
@@ -66,9 +66,9 @@ Button {
                 Layout.fillWidth: true
                 color: {
                     if (control.active || control.hovered) {
-                        return "#1de9b6";
+                        return qgcPal.buttonHighlightText;
                     } else {
-                        return "#ffffff";
+                        return qgcPal.buttonText;
                     }
                 }
             }

@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 
+import QGroundControl.Palette
+
 RowLayout {
     property var fact 
     property string labelText: ""
@@ -13,7 +15,7 @@ RowLayout {
         text: labelText
         font.family: "Pretendard"
         font.pointSize: customScreenTools.fontSize1
-        color: "white"
+        color: qgcPal.text
     }
 
     Item {
@@ -24,14 +26,14 @@ RowLayout {
     Text {
         text: valueText
         font.family: "Pretendard SemiBold"
-        color: "white"
+        color: qgcPal.text
         font.pointSize: customScreenTools.fontSize2
     }
 
     Text {
         text: unitText
         font.family: "Pretendard"
-        color: "white"
+        color: qgcPal.text
         font.pointSize: customScreenTools.fontSize1
         Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
     }

@@ -32,6 +32,12 @@ Item {
         source: "qrc:/custom/img/vehicle/vehicle_graphic.svg"
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
+
+        ColorOverlay {
+            anchors.fill: parent
+            source: fuselageImage
+            color: qgcPal.text
+        }
     }
 
     
@@ -204,7 +210,7 @@ Item {
                 text: "L - Aileron"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
-                color: customPal.normalColor
+                color: qgcPal.text
             }
 
             Label {
@@ -212,7 +218,7 @@ Item {
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFl.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: customPal.normalColor
+                color: qgcPal.text
             }
         }
     }
@@ -229,7 +235,7 @@ Item {
                 text: "R - Aileron"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
-                color: customPal.normalColor
+                color: qgcPal.text
             }
 
             Label {
@@ -237,7 +243,7 @@ Item {
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: customPal.normalColor
+                color: qgcPal.text
             }
         }
     }
@@ -253,7 +259,7 @@ Item {
                 text: "L - Rudder"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
-                color: customPal.normalColor
+                color: qgcPal.text
             }
 
             Label {
@@ -261,7 +267,7 @@ Item {
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: customPal.normalColor
+                color: qgcPal.text
             }
         }
     }
@@ -279,7 +285,7 @@ Item {
                 text: "R - Rudder"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
-                color: customPal.normalColor
+                color: qgcPal.text
             }
 
             Label {
@@ -287,7 +293,7 @@ Item {
                 text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: customPal.normalColor
+                color: qgcPal.text
             }
         }
     }

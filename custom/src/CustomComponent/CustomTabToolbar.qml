@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
+import Qt5Compat.GraphicalEffects
 
 import QGroundControl
 import QGroundControl.Controls
@@ -14,7 +15,7 @@ Rectangle {
     id: tabToolbar
     width: parent.width
     height: ScreenTools.toolbarHeight
-    color: "#292929"
+    color: qgcPal.window
 
     Item {
         anchors.fill: parent
@@ -27,6 +28,12 @@ Rectangle {
             anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 1.5
             width: ScreenTools.defaultFontPixelWidth * 3.2
             fillMode: Image.PreserveAspectFit
+
+            ColorOverlay {
+                anchors.fill: parent
+                source: airbility_logo
+                color: qgcPal.text
+            }
         }
 
         Image {
@@ -37,6 +44,12 @@ Rectangle {
             anchors.right: parent.right
             anchors.margins:        ScreenTools.defaultFontPixelHeight
             fillMode: Image.PreserveAspectFit
+
+            ColorOverlay {
+                anchors.fill: parent
+                source: airbility_typo_logo
+                color: qgcPal.text
+            }
         }
     }
     

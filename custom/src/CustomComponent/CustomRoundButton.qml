@@ -22,7 +22,7 @@ Rectangle {
         if (mouseArea.containsMouse) {
             return customPal.pointColor
         } else {
-            customPal.darkGray
+            return "transparent"
         }
     }
 
@@ -40,13 +40,7 @@ Rectangle {
             ColorOverlay {
                 anchors.fill: parent
                 source: parent
-                color: {
-                    if (mouseArea.containsMouse) {
-                        return customPal.darkGray
-                    } else {
-                        return customPal.normalColor
-                    }
-                }
+                color: qgcPal.text
             }
         }
 
@@ -55,13 +49,7 @@ Rectangle {
             text: roundButton.labelText
             font.family: "Pretendard"
             font.pointSize: 12
-            color: {
-                if (mouseArea.containsMouse) {
-                    return customPal.darkGray
-                } else {
-                    return customPal.normalColor
-                }
-            }
+            color: qgcPal.text
         }
     }
     
