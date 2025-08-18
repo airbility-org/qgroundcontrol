@@ -15,16 +15,38 @@ import QGroundControl.Controllers
 Item {
     id: tiltAnim
 
+    property int lineWidth: 3
     property real angle: 0
-    property real defaultRadius: width * 0.5 // 기준 반지름
+    property real defaultRadius: width * 0.5 - lineWidth // 기준 반지름
+    //property int angleIncrement: 5
 
     readonly property real progress: Math.abs(angle) / 90
     readonly property bool isAngleNegative: angle < 0
     readonly property bool isAngleOutlier: angle >= 100 || angle <= -100
-
+    
     onAngleChanged: {
         ellipseCanvas.requestPaint()
     }
+
+    /**
+    Timer {
+        interval: 100
+        running: true
+        repeat: true
+        onTriggered: {
+            tiltAnim.angle += tiltAnim.angleIncrement
+        
+            // 각도가 90도를 넘어가면 감소 방향으로 전환
+            if (tiltAnim.angle >= 90) {
+                tiltAnim.angleIncrement = -5
+            } 
+            // 각도가 -90도보다 작아지면 증가 방향으로 전환
+            else if (tiltAnim.angle <= -90) {
+                tiltAnim.angleIncrement = 5
+            }
+        }
+    }
+    **/
 
     function getColorByAngle() {
         if(isAngleOutlier) {
@@ -47,7 +69,7 @@ Item {
 
             var centerX = width / 2
             var centerY = height / 2
-            var adjustedAngle 
+            var adjustedAngle
 
             if (tiltAnim.isAngleOutlier) {
                 if (tiltAnim.isAngleNegative) {
@@ -70,17 +92,19 @@ Item {
 
             // 1. 선 (막대)
             ctx.beginPath()
-            ctx.moveTo(centerX, 0)
-            ctx.lineTo(centerX, height)
+            ctx.moveTo(centerX, lineWidth)
+            ctx.lineTo(centerX, height - lineWidth)
             ctx.strokeStyle = tiltAnim.getColorByAngle()
+            ctx.lineWidth = lineWidth
             ctx.stroke()
 
             // 2. 타원
             ctx.beginPath()
+            //ctx.lineWidth = 1
             if (tiltAnim.isAngleNegative) {
-                ctx.ellipse(centerX - tiltAnim.defaultRadius, height - Math.abs(radiusY) * 2 , radiusX * 2, Math.abs(radiusY) * 2, 0, 0, 2 * Math.PI)
+                ctx.ellipse(centerX - tiltAnim.defaultRadius, height - Math.abs(radiusY) * 2 - lineWidth, radiusX * 2, Math.abs(radiusY) * 2, 0, 0, 2 * Math.PI)
             } else {
-                ctx.ellipse(centerX - tiltAnim.defaultRadius, 0, radiusX * 2, Math.abs(radiusY) * 2, 0, 0, 2 * Math.PI)
+                ctx.ellipse(centerX - tiltAnim.defaultRadius, lineWidth, radiusX * 2, Math.abs(radiusY) * 2, 0, 0, 2 * Math.PI)
             }
 
             ctx.fillStyle = tiltAnim.getColorByAngle()
