@@ -18,13 +18,24 @@ Item {
     id: aircraftRoot
     property var _activeVehicle: QGroundControl.multiVehicleManager.activeVehicle
 
-    property bool isAileronAngleOutlier: _activeVehicle.vehicle.heading.value >= 100 || _activeVehicle.vehicle.heading.value <= -100
-    
+    // temp value for test
+    property var tiltFLAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
+    property var tiltFRAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
+    property var tiltRLAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
+    property var tiltRRAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
+
+    //property var tiltFLAngle: _activeVehicle ? _activeVehicle.tiltAngle.tiltFl.value : null
+    //property var tiltFRAngle: _activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value : null
+    //property var tiltRLAngle: _activeVehicle ? _activeVehicle.tiltAngle.tiltRl.value : null
+    //property var tiltRRAngle: _activeVehicle ? _activeVehicle.tiltAngle.tiltRr.value : null
+
+    property bool isAileronAngleOutlier: _activeVehicle ? (_activeVehicle.vehicle.heading.value >= 100 || _activeVehicle.vehicle.heading.value <= -100) : false
+
     function getColorByTiltAngle(tiltAngle) {
         if(tiltAngle >= 100 || tiltAngle <= -100) {
             return customPal.warnColor
         }
-        return customPal.normalColor
+        return qgcPal.text
     }
 
     Image {
@@ -148,66 +159,58 @@ Item {
 
     Label {
         id: tiltFLValue
-        //text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFl.value.toFixed(2) : "--") + " º"
-        text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
-        //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
+        text: (tiltFLAngle ? tiltFLAngle.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
         font.pointSize: customScreenTools.fontSize4
         anchors.top: tiltFLAnimation.top
         anchors.right: tiltFLAnimation.left
         anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByTiltAngle(_activeVehicle.vehicle.heading.value)
+        color: getColorByTiltAngle(tiltFLAngle)
     }
 
     Label {
         id: tiltFRValue
-        //text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
-        text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
-        //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
+        text: (tiltFRAngle ? tiltFRAngle.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
         font.pointSize: customScreenTools.fontSize4
         anchors.top: tiltFRAnimation.top
         anchors.left: tiltFRAnimation.right
         anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByTiltAngle(_activeVehicle.vehicle.heading.value)
+        color: getColorByTiltAngle(tiltFRAngle)
     }
 
     Label {
         id: tiltRLValue
-        //text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltRl.value.toFixed(2) : "--") + " º"
-        text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
-        //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
+        text: (tiltRLAngle ? tiltRLAngle.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
         font.pointSize: customScreenTools.fontSize4
         anchors.top: tiltRLAnimation.top
         anchors.right: tiltRLAnimation.left
         anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByTiltAngle(_activeVehicle.vehicle.heading.value)
+        color: getColorByTiltAngle(tiltRLAngle)
     }
 
     Label {
         id: tiltRRValue
-        //text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltRr.value.toFixed(2) : "--") + " º"
-        text: (_activeVehicle ? _activeVehicle.vehicle.heading.value.toFixed(2) : "--") + " º"
-        //text: (_activeVehicle ? tiltFLAnimation.angle.toFixed(2) : "--") + " º"
+        text: (tiltRRAngle ? tiltRRAngle.toFixed(2) : "--") + " º"
         font.family: "Pretendard SemiBold"
         font.pointSize: customScreenTools.fontSize4
         anchors.top: tiltRRAnimation.top
         anchors.left: tiltRRAnimation.right
         anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 3
-        color: getColorByTiltAngle(_activeVehicle.vehicle.heading.value)
+        color: getColorByTiltAngle(tiltRRAngle)
     }
 
     Item {
         id: aileronL
         anchors.top: fuselageImage.top
         anchors.topMargin: fuselageImage.height * 0.4
-        x: aileronLImage.x + (aileronLImage.width - aileronLImage.paintedWidth) / 2 - ScreenTools.defaultFontPixelWidth * 3 - aileronLLabel.width
+        x: aileronLImage.x + (aileronLImage.width - aileronLImage.paintedWidth) / 2  - aileronLValue.width - ScreenTools.defaultFontPixelWidth * 3
 
         ColumnLayout {
             Label {
                 id: aileronLLabel
-                text: "L - Aileron"
+                text: "Aileron L"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
                 color: qgcPal.text
@@ -232,7 +235,7 @@ Item {
         ColumnLayout {
             Label {
                 id: aileronRLabel
-                text: "R - Aileron"
+                text: "Aileron R"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
                 color: qgcPal.text
@@ -250,13 +253,13 @@ Item {
 
     Item {
         id: rudderL
-        x: (parent.width / 2) - fuselageImage.paintedWidth * (156.24 / 849.74) - rudderLLabel.width - ScreenTools.defaultFontPixelWidth * 3
+        x: (parent.width / 2) - fuselageImage.paintedWidth * (156.24 / 849.74) - rudderLValue.width - ScreenTools.defaultFontPixelWidth * 3
         y: (parent.height / 2) + (fuselageImage.paintedHeight / 2) - ScreenTools.defaultFontPixelHeight * 2
 
         ColumnLayout {
             Label {
                 id: rudderLLabel
-                text: "L - Rudder"
+                text: "Rudder L"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
                 color: qgcPal.text
@@ -282,7 +285,7 @@ Item {
 
             Label {
                 id: rudderRLabel
-                text: "R - Rudder"
+                text: "Rudder R"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
                 color: qgcPal.text
