@@ -2,7 +2,7 @@ import QtQuick
 
 Item {
     property var darkGray: "#292929"
-    property var lightGray: "#ACACAC"
+    property var lightGray: "#6D6D6D"
 
     property var mainSection: "#000000"
     property var semiTransparentBlack: "#8F000000"

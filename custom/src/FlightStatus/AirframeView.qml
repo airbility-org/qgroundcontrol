@@ -24,20 +24,43 @@ Item {
     property var tiltRLAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
     property var tiltRRAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
 
+    property var aileronLAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
+    property var aileronRAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
+    property var rudderLAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
+    property var rudderRAngle: _activeVehicle ? _activeVehicle.vehicle.heading.value : null
+
     //property var tiltFLAngle: _activeVehicle ? _activeVehicle.tiltAngle.tiltFl.value : null
     //property var tiltFRAngle: _activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value : null
     //property var tiltRLAngle: _activeVehicle ? _activeVehicle.tiltAngle.tiltRl.value : null
     //property var tiltRRAngle: _activeVehicle ? _activeVehicle.tiltAngle.tiltRr.value : null
 
-    property bool isAileronAngleOutlier: _activeVehicle ? (_activeVehicle.vehicle.heading.value >= 100 || _activeVehicle.vehicle.heading.value <= -100) : false
+    property var maxLightness: 0.7
+    property var minLightness: 0.3
 
     function getColorByTiltAngle(tiltAngle) {
+        // temp value for test
         if(tiltAngle >= 100 || tiltAngle <= -100) {
             return customPal.warnColor
         }
         return qgcPal.text
     }
 
+    function isAileronAngleOutlier(aileronAngle) {
+        // temp value for test
+        if(aileronAngle > 300) {
+            return true
+        } 
+        return false
+    }
+
+    function isRudderAngleOutlier(rudderAngle) {
+        // temp value for test
+        if(rudderAngle > 300) {
+            return true
+        } 
+        return false
+    }
+ 
     Image {
         id: fuselageImage
         source: "qrc:/custom/img/vehicle/vehicle_graphic.svg"
@@ -47,11 +70,10 @@ Item {
         ColorOverlay {
             anchors.fill: parent
             source: fuselageImage
-            color: qgcPal.text
+            color: qgcPal.globalTheme === QGCPalette.Light ? "#D7D7D7" : "#5A5A5A"
         }
     }
 
-    
     property real actualImageVerticalOffset: (fuselageImage.height - fuselageImage.paintedHeight) / 2
     property real actualImageHorizontalOffset: (fuselageImage.width - fuselageImage.paintedWidth) / 2
 
@@ -61,11 +83,26 @@ Item {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
 
+        // Temp Range: 0 ~ 60, Real Range: -30 ~ 30
+        property var adjustedAileronLAngle: aileronLAngle <= 60 ? aileronLAngle : 60
+        readonly property real progress: adjustedAileronLAngle / 60
+        //readonly property real progress: (adjustedAileronLAngle + 30) / 60
+
         ColorOverlay {
             anchors.fill: parent
             source: aileronLImage
-            color: customPal.lightGray
-            visible: isAileronAngleOutlier
+            color: {
+                var l = aileronLImage.progress * (maxLightness - minLightness) + minLightness
+                return Qt.hsla(0, 0, l, 1);
+            }
+            visible : !isAileronAngleOutlier(aileronLAngle)
+        }
+
+        ColorOverlay {
+            anchors.fill: parent
+            source: aileronLImage
+            color: qgcPal.warningText
+            visible: isAileronAngleOutlier(aileronLAngle)
         }
     }
 
@@ -75,10 +112,25 @@ Item {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
 
+        property var adjustedAileronRAngle: aileronRAngle <= 60 ? aileronRAngle : 60
+        readonly property real progress: adjustedAileronRAngle / 60
+        //readonly property real progress: (adjustedAileronRAngle + 30) / 60
+
         ColorOverlay {
             anchors.fill: parent
             source: aileronRImage
-            color: customPal.lightGray
+            color: {
+                var l = aileronRImage.progress * (maxLightness - minLightness) + minLightness
+                return Qt.hsla(0, 0, l, 1);
+            }
+            visible : !isAileronAngleOutlier(aileronRAngle)
+        }
+
+        ColorOverlay {
+            anchors.fill: parent
+            source: aileronRImage
+            color: qgcPal.warningText
+            visible : isAileronAngleOutlier(aileronRAngle)
         }
     }
 
@@ -88,10 +140,18 @@ Item {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
 
+        // Temp Range: 0 ~ 80, Real Range: -40 ~ 40
+        property var adjustedRudderLAngle: rudderLAngle <= 80 ? rudderLAngle : 80
+        readonly property real progress: adjustedRudderLAngle / 80
+        //readonly property real progress: (adjustedRudderLAngle + 40) / 80
+
         ColorOverlay {
             anchors.fill: parent
             source: rudderLImage
-            color: customPal.lightGray
+            color: {
+                var l = rudderLImage.progress * (maxLightness - minLightness) + minLightness
+                return Qt.hsla(0, 0, l, 1);
+            }
         }
     }
 
@@ -101,11 +161,17 @@ Item {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
 
+        property var adjustedRudderRAngle: rudderRAngle <= 80 ? rudderRAngle : 80
+        readonly property real progress: adjustedRudderRAngle / 80
+        //readonly property real progress: (adjustedRudderRAngle + 40) / 80
+
         ColorOverlay {
             anchors.fill: parent
             source: rudderRImage
-            color: customPal.lightGray
-            visible: isAileronAngleOutlier
+            color: {
+                var l = rudderRImage.progress * (maxLightness - minLightness) + minLightness
+                return Qt.hsla(0, 0, l, 1);
+            }
         }
     }
 
@@ -117,8 +183,7 @@ Item {
         anchors.left: fuselageImage.left
         anchors.topMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.1
         anchors.leftMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
-        angle: _activeVehicle ? _activeVehicle.vehicle.heading.value : 0
-        //angle: _activeVehicle.tiltAngle.tiltFl.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltFl.value
+        angle: tiltFLAngle
     }
 
     TiltAnimation {
@@ -129,8 +194,7 @@ Item {
         anchors.right: fuselageImage.right
         anchors.topMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.1
         anchors.rightMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
-        angle: _activeVehicle ? _activeVehicle.vehicle.heading.value : 0
-        //angle: _activeVehicle.tiltAngle.tiltFr.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltFr.value
+        angle: tiltFRAngle
     }
 
     TiltAnimation {
@@ -141,8 +205,7 @@ Item {
         anchors.left: fuselageImage.left
         anchors.bottomMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.2
         anchors.leftMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
-        angle: _activeVehicle ? _activeVehicle.vehicle.heading.value : 0
-        //angle: _activeVehicle.tiltAngle.tiltRl.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltRl.value
+        angle: tiltRLAngle
     }
 
     TiltAnimation {
@@ -153,8 +216,7 @@ Item {
         anchors.right: fuselageImage.right
         anchors.bottomMargin: actualImageVerticalOffset + fuselageImage.paintedHeight * 0.2
         anchors.rightMargin: actualImageHorizontalOffset + fuselageImage.paintedWidth * 0.2
-        angle: _activeVehicle ? _activeVehicle.vehicle.heading.value : 0
-        //angle: _activeVehicle.tiltAngle.tiltRr.value > 90 ? 90 : _activeVehicle.tiltAngle.tiltRr.value
+        angle: tiltRRAngle
     }
 
     Label {
@@ -205,23 +267,34 @@ Item {
         id: aileronL
         anchors.top: fuselageImage.top
         anchors.topMargin: fuselageImage.height * 0.4
-        x: aileronLImage.x + (aileronLImage.width - aileronLImage.paintedWidth) / 2  - aileronLValue.width - ScreenTools.defaultFontPixelWidth * 3
+        width:  customScreenTools.fontSize3 * 7
+        x: aileronLImage.x + (aileronLImage.width - aileronLImage.paintedWidth) / 2  - width - ScreenTools.defaultFontPixelWidth * 3
 
         ColumnLayout {
+            anchors.fill: parent
             Label {
                 id: aileronLLabel
                 text: "Aileron L"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
                 color: qgcPal.text
+                horizontalAlignment: Text.AlignRight
+                Layout.fillWidth: true
             }
 
             Label {
                 id: aileronLValue
-                text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFl.value.toFixed(2) : "--") + " º"
+                text: (aileronLAngle ? aileronLAngle.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: qgcPal.text
+                color: {
+                    if(isAileronAngleOutlier(aileronLAngle)) {
+                        return qgcPal.warningText
+                    }
+                    return qgcPal.text
+                }
+                horizontalAlignment: Text.AlignRight
+                Layout.fillWidth: true
             }
         }
     }
@@ -243,34 +316,45 @@ Item {
 
             Label {
                 id: aileronRValue
-                text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
+                text: (aileronRAngle ? aileronRAngle.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
-                color: qgcPal.text
+                color: {
+                    if(isAileronAngleOutlier(aileronRAngle)) {
+                        return qgcPal.warningText
+                    }
+                    return qgcPal.text
+                }
             }
         }
     }
 
     Item {
         id: rudderL
-        x: (parent.width / 2) - fuselageImage.paintedWidth * (156.24 / 849.74) - rudderLValue.width - ScreenTools.defaultFontPixelWidth * 3
+        width:  customScreenTools.fontSize3 * 7
+        x: (parent.width / 2) - fuselageImage.paintedWidth * (156.24 / 849.74) - width - ScreenTools.defaultFontPixelWidth * 3
         y: (parent.height / 2) + (fuselageImage.paintedHeight / 2) - ScreenTools.defaultFontPixelHeight * 2
 
         ColumnLayout {
+            anchors.fill: parent
             Label {
                 id: rudderLLabel
                 text: "Rudder L"
                 font.family: "Pretendard"
                 font.pointSize: customScreenTools.fontSize2
                 color: qgcPal.text
+                horizontalAlignment: Text.AlignRight
+                Layout.fillWidth: true
             }
 
             Label {
                 id: rudderLValue
-                text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
+                text: (rudderLAngle ? rudderLAngle.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
                 color: qgcPal.text
+                horizontalAlignment: Text.AlignRight
+                Layout.fillWidth: true
             }
         }
     }
@@ -293,7 +377,7 @@ Item {
 
             Label {
                 id: rudderRValue
-                text: (_activeVehicle ? _activeVehicle.tiltAngle.tiltFr.value.toFixed(2) : "--") + " º"
+                text: (rudderRAngle ? rudderRAngle.toFixed(2) : "--") + " º"
                 font.family: "Pretendard SemiBold"
                 font.pointSize: customScreenTools.fontSize3
                 color: qgcPal.text

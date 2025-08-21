@@ -15,7 +15,7 @@ import QGroundControl.Controllers
 Item {
     id: tiltAnim
 
-    property int lineWidth: 3
+    property int lineWidth: 5
     property real angle: 0
     property real defaultRadius: width * 0.5 - lineWidth // 기준 반지름
     //property int angleIncrement: 5
