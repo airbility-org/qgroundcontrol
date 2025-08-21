@@ -136,3 +136,7 @@ void CustomFirmwarePlugin::updateAvailableFlightModes(FlightModeList &modeList)
     }
     _updateFlightModeList(modeList);
 }
+
+QString CustomFirmwarePlugin::vehicleImageOpaque(const Vehicle* vehicle) const {
+    return QStringLiteral("/custom/img/vehicle_map_v2.svg");
+}

@@ -20,6 +20,7 @@
         <file alias="airbility_typo_logo_black.svg">res/Images/airbility_typo_logo_black.svg</file>
         <file alias="gcs_position.svg">res/Images/gcs_position.svg</file>
         <file alias="vehicle_map.svg">res/Images/vehicle_map.svg</file>
+        <file alias="vehicle_map_v2.svg">res/Images/vehicle_map_v2.svg</file>
 
         <file alias="vehicle/tilt_0.svg">res/Images/vehicle/tilt_0.svg</file>
         <file alias="vehicle/tilt_30.svg">res/Images/vehicle/tilt_30.svg</file>

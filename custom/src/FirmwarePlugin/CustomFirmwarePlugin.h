@@ -30,6 +30,7 @@ public:
     const QVariantList& toolIndicators  (const Vehicle* vehicle) final;
     bool                hasGimbal       (Vehicle* vehicle, bool& rollSupported, bool& pitchSupported, bool& yawSupported) const final;
     void                updateAvailableFlightModes      (FlightModeList &modeList) override;
+    QString vehicleImageOpaque (const Vehicle*) const;
 
 private:
     QVariantList _toolIndicatorList;
