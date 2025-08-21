@@ -23,7 +23,7 @@ Button {
             if (control.active || control.hovered) {
                 return qgcPal.buttonHighlight;
             } else {
-                return qgcPal.window;
+                return qgcPal.globalTheme === QGCPalette.Light ? "#EBEBEB" : "#292929";
             }
         }
         

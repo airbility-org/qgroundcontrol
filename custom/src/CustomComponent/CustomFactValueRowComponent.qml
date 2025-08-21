@@ -6,16 +6,15 @@ import QGroundControl.Palette
 RowLayout {
     property var fact 
     property string labelText: ""
-    property string valueText: fact ? fact.valueString : "--"
+    property var valueText: fact ? fact.value : NaN
     property string unitText: fact ? fact.units : "--"
-
-    width: parent ? parent.width : 0
 
     Text {
         text: labelText
         font.family: "Pretendard"
         font.pointSize: customScreenTools.fontSize1
         color: qgcPal.text
+        horizontalAlignment: Text.AlignLeft
     }
 
     Item {
@@ -24,10 +23,12 @@ RowLayout {
     }
 
     Text {
-        text: valueText
+        text: !isNaN(valueText) ? valueText.toFixed(2) : "--"
         font.family: "Pretendard SemiBold"
         color: qgcPal.text
         font.pointSize: customScreenTools.fontSize2
+        Layout.preferredWidth: customScreenTools.fontSize2 * 4
+        horizontalAlignment: Text.AlignRight
     }
 
     Text {
@@ -35,6 +36,6 @@ RowLayout {
         font.family: "Pretendard"
         color: qgcPal.text
         font.pointSize: customScreenTools.fontSize1
-        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+        Layout.alignment: Qt.AlignRight
     }
 }

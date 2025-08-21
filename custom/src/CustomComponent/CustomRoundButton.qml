@@ -15,12 +15,12 @@ Rectangle {
     width: ScreenTools.defaultFontPixelWidth * 11
     height: ScreenTools.defaultFontPixelWidth * 5
     radius: 29.5
-    border.color: customPal.pointColor
+    border.color: qgcPal.globalTheme === QGCPalette.Light ? "#009788" : customPal.pointColor
     border.width: 1.5
 
     color: {
         if (mouseArea.containsMouse) {
-            return customPal.pointColor
+            return qgcPal.globalTheme === QGCPalette.Light ? "#009788" : customPal.pointColor
         } else {
             return "transparent"
         }
@@ -40,7 +40,13 @@ Rectangle {
             ColorOverlay {
                 anchors.fill: parent
                 source: parent
-                color: qgcPal.text
+                color: {
+                    if (mouseArea.containsMouse) {
+                        return qgcPal.globalTheme === QGCPalette.Light ? "#ffffff" : "#000000"
+                    } else {
+                        return qgcPal.text
+                    }
+                }
             }
         }
 
@@ -49,7 +55,13 @@ Rectangle {
             text: roundButton.labelText
             font.family: "Pretendard"
             font.pointSize: 12
-            color: qgcPal.text
+            color: {
+                if (mouseArea.containsMouse) {
+                    return qgcPal.globalTheme === QGCPalette.Light ? "#ffffff" : "#000000"
+                } else {
+                    return qgcPal.text
+                }
+            }
         }
     }
     

@@ -15,7 +15,7 @@ Rectangle {
     id: tabToolbar
     width: parent.width
     height: ScreenTools.toolbarHeight
-    color: qgcPal.window
+    color: qgcPal.globalTheme === QGCPalette.Light ? "#EBEBEB" : "#292929";
 
     Item {
         anchors.fill: parent

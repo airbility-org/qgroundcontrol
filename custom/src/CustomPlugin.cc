@@ -337,6 +337,12 @@ void CustomPlugin::paletteOverride(const QString &colorName, QGCPalette::Palette
         colorInfo[QGCPalette::Light][QGCPalette::ColorGroupEnabled]  = QColor("#6045c5");
         colorInfo[QGCPalette::Light][QGCPalette::ColorGroupDisabled] = QColor("#48d6ff");
     }
+    else if (colorName == QStringLiteral("toolbarBackground")) {
+        colorInfo[QGCPalette::Dark][QGCPalette::ColorGroupEnabled]   = QColor("#292929");
+        colorInfo[QGCPalette::Dark][QGCPalette::ColorGroupDisabled]  = QColor("#292929");
+        colorInfo[QGCPalette::Light][QGCPalette::ColorGroupEnabled]  = QColor("#EBEBEB");
+        colorInfo[QGCPalette::Light][QGCPalette::ColorGroupDisabled] = QColor("#EBEBEB");
+    }
 }
 
 // We override this so we can get access to QQmlApplicationEngine and use it to register our qml module

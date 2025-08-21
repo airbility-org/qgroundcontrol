@@ -14,7 +14,7 @@ Rectangle {
     signal closeToggleRequested()
 
     width: ScreenTools.defaultFontPixelWidth * 25
-    color: qgcPal.window
+    color: qgcPal.toolbarBackground
     anchors.left: parent.left
     anchors.bottom: parent.bottom
 
@@ -41,7 +41,7 @@ Rectangle {
         // 구분선
         Rectangle {
             width: parent.width
-            height: 1 // 선의 두께
+            height: 1.5 // 선의 두께
             color: "#848484"
             Layout.topMargin: ScreenTools.defaultFontPixelHeight
             Layout.bottomMargin: ScreenTools.defaultFontPointSize * 0.1
@@ -91,7 +91,7 @@ Rectangle {
         // 구분선
         Rectangle {
             width: parent.width
-            height: 1
+            height: 1.5
             color: "#848484"
             Layout.topMargin: ScreenTools.defaultFontPixelHeight
             Layout.bottomMargin: ScreenTools.defaultFontPointSize * 0.1

@@ -17,184 +17,107 @@ import "qrc:/custom/qml/CustomComponent"
 
 Rectangle {
     id: customTelemetryWidget
-    property int externalParentWidth: parent.width
-    property int externalParnetHeight: parent.height
 
-    width: 750 * customScreenTools.defaultWidthRatio
-    height: 200 * customScreenTools.defaultHeightRatio
-    color: qgcPal.window
+    implicitWidth: rowLayout.implicitWidth + customScreenTools.fontSize2 * 2
+    implicitHeight: rowLayout.implicitHeight + customScreenTools.fontSize2 * 2
+    anchors.margins: customScreenTools.fontSize2
+    color: Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.8) 
     radius: 10
 
-    property int valuePointSize: 13
     property var _activeVehicle: QGroundControl.multiVehicleManager.activeVehicle
 
     QGCPalette { id: qgcPal; colorGroupEnabled: enabled }
 
     DeadMouseArea {
-        anchors.fill:       parent
+        anchors.fill: parent
     }
 
-    Item {
-        id: speedSection
-        anchors.left: parent.left
-        width: parent.width / 3
-        height: parent.height
+    RowLayout {
+        id: rowLayout
+        anchors.fill: parent
+        anchors.margins: customScreenTools.fontSize2
+        spacing: customScreenTools.fontSize2 * 3
 
-        Row {
-            id: headerRow
-            spacing: customScreenTools.fontSize2
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: customScreenTools.fontSize2
-
-            Image {
-                id: speedIcon
-                source: "qrc:/custom/icon/Speed_ico.svg"
-                fillMode: Image.PreserveAspectFit
-                width: customScreenTools.fontSize2 * 1.3
-
-                ColorOverlay {
-                    anchors.fill: parent
-                    source: speedIcon
-                    color: qgcPal.text
+        Repeater {
+            model: [
+                { 
+                    title: "SPEED", 
+                    icon: "qrc:/custom/icon/Speed_ico.svg", 
+                    rows: [
+                        { label: "Airspeed", vehicleFact: _activeVehicle ? _activeVehicle.vehicle.airSpeed : undefined },
+                        { label: "Ground Speed", vehicleFact: _activeVehicle ? _activeVehicle.vehicle.groundSpeed : undefined },
+                    ]
+                },
+                { 
+                    title: "POSITION", 
+                    icon: "qrc:/custom/icon/Position_ico.svg", 
+                    rows: [
+                        { label: "Latitude", vehicleFact: _activeVehicle ? _activeVehicle.gps.lat : undefined },
+                        { label: "Longitude", vehicleFact: _activeVehicle ? _activeVehicle.gps.lon : undefined },
+                    ]
+                },
+                { 
+                    title: "HEIGHT", 
+                    icon: "qrc:/custom/icon/Height_ico.svg", 
+                    rows: [
+                        { label: "AGL", vehicleFact: _activeVehicle ? _activeVehicle.vehicle.airSpeed : undefined },
+                        { label: "MSL", vehicleFact: _activeVehicle ? _activeVehicle.vehicle.altitudeAMSL : undefined },
+                    ]
                 }
-            }
+            ]
 
-            Text {
-                id: speedLabel
-                text: "SPEED"
-                font.family: "Pretendard SemiBold"
-                font.pointSize: customScreenTools.fontSize2
-                color: qgcPal.text
-            }
-        }
+            delegate: Item {
+                id: section
+                Layout.fillHeight: true
+                Layout.preferredWidth: colLayout.implicitWidth + customScreenTools.fontSize2
+                implicitHeight: colLayout.implicitHeight
 
-        Column {
-            id: airSpeedData
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: headerRow.bottom
-            anchors.margins: customScreenTools.fontSize2
-            spacing: customScreenTools.fontSize1
-            
-            CustomFactValueRowComponent {
-                labelText: "Airspeed"
-                fact: _activeVehicle ? _activeVehicle.vehicle.airSpeed : undefined
-            }
-
-            CustomFactValueRowComponent {
-                labelText: "Ground Speed"
-                fact: _activeVehicle ? _activeVehicle.vehicle.groundSpeed : undefined
-            }
-        }
-    }
-
-    Item {
-        id: positionSection
-        anchors.left: speedSection.right
-        width: parent.width / 3
-        height: parent.height
-
-        RowLayout {
-            id: positionRow
-            spacing: customScreenTools.fontSize2
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top // 세로 위치도 지정해줍니다.
-            anchors.topMargin: customScreenTools.fontSize2
-
-            Image {
-                id: positionIcon
-                source: "qrc:/custom/icon/Position_ico.svg"
-                fillMode: Image.PreserveAspectFit
-                width: customScreenTools.fontSize2 * 1.2
-
-                ColorOverlay {
+                ColumnLayout {
+                    id: colLayout
                     anchors.fill: parent
-                    source: positionIcon
-                    color: qgcPal.text
+                    spacing: customScreenTools.fontSize1
+
+                    RowLayout {
+                        Layout.alignment: Qt.AlignHCenter
+                        spacing: customScreenTools.fontSize2 / 2
+                        Image {
+                            id: icon
+                            source: modelData.icon
+                            fillMode: Image.PreserveAspectFit
+                            width: title.height * 0.9
+
+                            ColorOverlay {
+                                anchors.fill: parent
+                                source: icon
+                                color: qgcPal.text
+                            }
+                        }
+                        Text {
+                            id: title
+                            text: modelData.title
+                            font.family: "Pretendard SemiBold"
+                            font.pointSize: customScreenTools.fontSize2
+                            color: qgcPal.text
+                        }
+                    }
+
+                    Repeater {
+                        model: modelData.rows
+                        delegate: CustomFactValueRowComponent {
+                            Layout.fillWidth: true
+                            labelText: modelData.label
+                            fact: modelData.vehicleFact
+                        }
+                    }
                 }
-            }
-
-            Text {
-                id: positionLabel
-                text: "POSITION"
-                font.family: "Pretendard SemiBold"
-                font.pointSize: customScreenTools.fontSize2
-                color: qgcPal.text
-            }
-        }
-
-        Column {
-            id: positionData
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: positionRow.bottom
-            anchors.margins: customScreenTools.fontSize2
-            spacing: customScreenTools.fontSize1
-
-            CustomFactValueRowComponent {
-                labelText: "Latitude"
-                fact: _activeVehicle ? _activeVehicle.gps.lat : undefined
-            }
-
-            CustomFactValueRowComponent {
-                labelText: "Longitude"
-                fact: _activeVehicle ? _activeVehicle.gps.lon : undefined
-            }
-        }
-    }
-
-    Item {
-        id: heightSection
-        anchors.left: positionSection.right
-        width: parent.width / 3
-        height: parent.height
-
-        Row {
-            id: heightRow
-            spacing: customScreenTools.fontSize2
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top // 세로 위치도 지정해줍니다.
-            anchors.topMargin: customScreenTools.fontSize2
-
-            Image {
-                id: heightIcon
-                source: "qrc:/custom/icon/Height_ico.svg"
-                fillMode: Image.PreserveAspectFit
-                width: customScreenTools.fontSize2 * 1.2
-                
-                ColorOverlay {
-                    anchors.fill: parent
-                    source: speedIcon
+                Rectangle {
+                    visible: index < 2
+                    width: 1.5
+                    height: colLayout.height
                     color: qgcPal.text
+                    anchors.left: section.right
+                    anchors.leftMargin: customScreenTools.fontSize2 * 1.5
                 }
-            }
-
-            Text {
-                id: heightLabel
-                text: "HEIGHT"
-                font.family: "Pretendard SemiBold"
-                font.pointSize: customScreenTools.fontSize2
-                color: qgcPal.text
-            }
-         }
-
-        Column {
-            id: heightData
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: heightRow.bottom
-            anchors.margins: customScreenTools.fontSize2
-            spacing: customScreenTools.fontSize1
-
-            CustomFactValueRowComponent {
-                labelText: "AGL"
-                fact: _activeVehicle ? _activeVehicle.vehicle.airSpeed : undefined
-            }
-
-            CustomFactValueRowComponent {
-                labelText: "MSL"
-                fact: _activeVehicle ? _activeVehicle.vehicle.altitudeAMSL : undefined
             }
         }
     }
