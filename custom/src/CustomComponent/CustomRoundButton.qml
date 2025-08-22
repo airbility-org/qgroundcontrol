@@ -15,12 +15,12 @@ Rectangle {
     width: ScreenTools.defaultFontPixelWidth * 11
     height: ScreenTools.defaultFontPixelWidth * 5
     radius: 29.5
-    border.color: qgcPal.globalTheme === QGCPalette.Light ? "#009788" : customPal.pointColor
+    border.color: qgcPal.customPointColor
     border.width: 1.5
 
     color: {
         if (mouseArea.containsMouse) {
-            return qgcPal.globalTheme === QGCPalette.Light ? "#009788" : customPal.pointColor
+            return qgcPal.customPointColor
         } else {
             return "transparent"
         }

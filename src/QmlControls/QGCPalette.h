@@ -158,6 +158,8 @@ public:
     DEFINE_QGC_COLOR(toolStripHoverColor,           setToolStripHoverColor)
     DEFINE_QGC_COLOR(groupBorder,                   setGroupBorder)
 
+    DEFINE_QGC_COLOR(customPointColor,              setCustomPointColor)
+
 #ifdef QGC_UTM_ADAPTER
     DEFINE_QGC_COLOR(switchUTMSP,                    setSwitchUTMSP)
     DEFINE_QGC_COLOR(sliderUTMSP,                    setSliderUTMSP)

@@ -5,7 +5,7 @@ import QGroundControl.ScreenTools
 
 Rectangle {
     id: toggleButton
-    border.color: customPal.pointColor
+    border.color: qgcPal.customPointColor
     border.width: 1.5
 
     width: ScreenTools.defaultFontPixelWidth * 4.7
@@ -16,7 +16,7 @@ Rectangle {
 
     color: {
         if (mouseArea.containsMouse) {
-            return customPal.pointColor
+            return qgcPal.customPointColor
         } else {
             return "transparent"
         }
@@ -37,7 +37,7 @@ Rectangle {
                 if (mouseArea.containsMouse) {
                     return customPal.normalColor
                 } else {
-                    return customPal.pointColor
+                    return qgcPal.customPointColor
                 }
             }
         }

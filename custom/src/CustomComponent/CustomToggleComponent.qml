@@ -11,7 +11,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: qgcPal.window
+        color: qgcPal.toolbarBackground
         radius: 5
 
         CustomToggleButton {

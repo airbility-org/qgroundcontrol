@@ -88,8 +88,6 @@ Item {
             var radiusX = tiltAnim.defaultRadius
             var radiusY = tiltAnim.defaultRadius * ratio
 
-            var yOffset = tiltAnim.defaultRadius * tiltAnim.progress
-
             // 1. 선 (막대)
             ctx.beginPath()
             ctx.moveTo(centerX, lineWidth)
