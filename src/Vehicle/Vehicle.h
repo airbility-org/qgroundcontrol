@@ -47,7 +47,8 @@
 #include "GimbalController.h"
 
 #include "FakeFactGroup.h"
-#include "CustomTiltAngleFactGroup.h"
+#include "CustomTiltAngleSetpointFactGroup.h"
+#include "CustomTiltStatusFactGroup.h"
 
 class Actuators;
 class AutoPilotPlugin;
@@ -255,7 +256,8 @@ public:
 
     // FactGroup object model properties
 
-    Q_PROPERTY(FactGroup*           tiltAngle         READ tiltAngleFactGroup           CONSTANT)
+    Q_PROPERTY(FactGroup*           tiltAngleSetpoint         READ tiltAngleSetpointFactGroup           CONSTANT)
+    Q_PROPERTY(FactGroup*           tiltStatus        READ tiltStatusFactGroup          CONSTANT)
     Q_PROPERTY(FactGroup*           fake         READ fakeFactGroup           CONSTANT)
     Q_PROPERTY(FactGroup*           vehicle         READ vehicleFactGroup           CONSTANT)
     Q_PROPERTY(FactGroup*           gps             READ gpsFactGroup               CONSTANT)
@@ -617,7 +619,14 @@ public:
     FactGroup* rpmFactGroup                 () { return &_rpmFactGroup; }
 
     FactGroup* fakeFactGroup () { return &_fakeFactGroup; }
+<<<<<<< HEAD
     FactGroup* tiltAngleFactGroup () { return &_tiltAngleFactGroup; }
+=======
+    FactGroup* tiltAngleSetpointFactGroup () { return &_tiltAngleSetpointFactGroup; }
+    FactGroup* tiltStatusFactGroup () { return &_tiltStatusFactGroup; }
+    FactGroup* controlSurfaceCmdFactGroup() { return &_controlSurfaceCmdFactGroup; }
+    FactGroup* escHbciFactGroup() { return &_escHbciFactGroup; }
+>>>>>>> f2c4e8c53 (Add tilt angle status information to HUD and change the name of tilt angle -> tilt angle setpoint)
     QmlObjectListModel* batteries           () { return &_batteryFactGroupListModel; }
 
     MissionManager*                 missionManager      () { return _missionManager; }
@@ -1261,7 +1270,14 @@ private:
     const QString _rpmFactGroupName =                QStringLiteral("rpm");
 
     const QString _fakeFactGroupName = QStringLiteral("fake");
+<<<<<<< HEAD
     const QString _tiltAngleFactGroupName = QStringLiteral("tiltAngle");
+=======
+    const QString _tiltAngleSetpointFactGroupName = QStringLiteral("tiltAngleSetpoint");
+    const QString _tiltStatusFactGroupName = QStringLiteral("tiltStatus");
+    const QString _controlSurfaceCmdFactGroupName = QStringLiteral("controlSurfaceCmd");
+    const QString _escHbciFactGroupName = QStringLiteral("escHbci");
+>>>>>>> f2c4e8c53 (Add tilt angle status information to HUD and change the name of tilt angle -> tilt angle setpoint)
 
     VehicleFactGroup*               _vehicleFactGroup;
     VehicleGPSFactGroup             _gpsFactGroup;
@@ -1283,7 +1299,14 @@ private:
     TerrainFactGroup                _terrainFactGroup;
 
     FakeFactGroup _fakeFactGroup;
+<<<<<<< HEAD
     CustomTiltAngleFactGroup _tiltAngleFactGroup;
+=======
+    CustomTiltAngleSetpointFactGroup _tiltAngleSetpointFactGroup;
+    CustomTiltStatusFactGroup _tiltStatusFactGroup;
+    ControlSurfaceCmdFactGroup _controlSurfaceCmdFactGroup;
+    EscHBCIFactGroup _escHbciFactGroup;
+>>>>>>> f2c4e8c53 (Add tilt angle status information to HUD and change the name of tilt angle -> tilt angle setpoint)
     
     QmlObjectListModel              _batteryFactGroupListModel;
 

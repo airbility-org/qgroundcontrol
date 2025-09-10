@@ -1,0 +1,126 @@
+{
+    "version": 1,
+    "fileType": "FactMetaData",
+    "QGC.MetaData.Facts": [
+        {
+            "name": "angleFl",
+            "shortDesc": "Front Left Angle",
+            "type": "float",
+            "units": "deg"
+        },
+        {
+            "name": "angleFr",
+            "shortDesc": "Front Right Angle",
+            "type": "float",
+            "units": "deg"
+        },
+        {
+            "name": "angleRl",
+            "shortDesc": "Rear Left Angle",
+            "type": "float",
+            "units": "deg"
+        },
+        {
+            "name": "angleRr",
+            "shortDesc": "Rear Right Angle",
+            "type": "float",
+            "units": "deg"
+        },
+        {
+            "name": "angularVelFl",
+            "shortDesc": "FL Angular Velocity",
+            "type": "float",
+            "units": "deg/s"
+        },
+        {
+            "name": "angularVelFr",
+            "shortDesc": "FR Angular Velocity",
+            "type": "float",
+            "units": "deg/s"
+        },
+        {
+            "name": "angularVelRl",
+            "shortDesc": "RL Angular Velocity",
+            "type": "float",
+            "units": "deg/s"
+        },
+        {
+            "name": "angularVelRr",
+            "shortDesc": "RR Angular Velocity",
+            "type": "float",
+            "units": "deg/s"
+        },
+        {
+            "name": "voltageFl",
+            "shortDesc": "FL Voltage",
+            "type": "float",
+            "units": "V"
+        },
+        {
+            "name": "voltageFr",
+            "shortDesc": "FR Voltage",
+            "type": "float",
+            "units": "V"
+        },
+        {
+            "name": "voltageRl",
+            "shortDesc": "RL Voltage",
+            "type": "float",
+            "units": "V"
+        },
+        {
+            "name": "voltageRr",
+            "shortDesc": "RR Voltage",
+            "type": "float",
+            "units": "V"
+        },
+        {
+            "name": "currentFl",
+            "shortDesc": "FL Current",
+            "type": "int32",
+            "units": "mA"
+        },
+        {
+            "name": "currentFr",
+            "shortDesc": "FR Current",
+            "type": "int32",
+            "units": "mA"
+        },
+        {
+            "name": "currentRl",
+            "shortDesc": "RL Current",
+            "type": "int32",
+            "units": "mA"
+        },
+        {
+            "name": "currentRr",
+            "shortDesc": "RR Current",
+            "type": "int32",
+            "units": "mA"
+        },
+        {
+            "name": "tempFl",
+            "shortDesc": "FL Temperature",
+            "type": "float",
+            "units": "degC"
+        },
+        {
+            "name": "tempFr",
+            "shortDesc": "FR Temperature",
+            "type": "float",
+            "units": "degC"
+        },
+        {
+            "name": "tempRl",
+            "shortDesc": "RL Temperature",
+            "type": "float",
+            "units": "degC"
+        },
+        {
+            "name": "tempRr",
+            "shortDesc": "RR Temperature",
+            "type": "float",
+            "units": "degC"
+        }
+    ]
+}

@@ -119,7 +119,8 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _terrainFactGroup             (this)
 
     , _fakeFactGroup (this)
-    , _tiltAngleFactGroup (this)
+    , _tiltAngleSetpointFactGroup (this)
+    , _tiltStatusFactGroup(this)
     , _terrainProtocolHandler       (new TerrainProtocolHandler(this, &_terrainFactGroup, this))
 {
     connect(JoystickManager::instance(), &JoystickManager::activeJoystickChanged, this, &Vehicle::_loadJoystickSettings);
@@ -223,7 +224,15 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _localPositionFactGroup           (this)
     , _localPositionSetpointFactGroup   (this)
     , _fakeFactGroup (this)
+<<<<<<< HEAD
     , _tiltAngleFactGroup (this)
+=======
+    , _tiltAngleSetpointFactGroup (this)
+    , _tiltStatusFactGroup(this)
+    , _controlSurfaceCmdFactGroup(this)
+    , _escHbciFactGroup(this)
+    
+>>>>>>> f2c4e8c53 (Add tilt angle status information to HUD and change the name of tilt angle -> tilt angle setpoint)
 {
     // This will also set the settings based firmware/vehicle types. So it needs to happen first.
     if (_firmwareType == MAV_AUTOPILOT_TRACK) {
@@ -345,7 +354,8 @@ void Vehicle::_commonInit()
     _addFactGroup(&_terrainFactGroup,           _terrainFactGroupName);
 
     _addFactGroup(&_fakeFactGroup, _fakeFactGroupName);
-    _addFactGroup(&_tiltAngleFactGroup, _tiltAngleFactGroupName);
+    _addFactGroup(&_tiltAngleSetpointFactGroup, _tiltAngleSetpointFactGroupName);
+    _addFactGroup(&_tiltStatusFactGroup, _tiltStatusFactGroupName);
 
     // Add firmware-specific fact groups, if provided
     QMap<QString, FactGroup*>* fwFactGroups = _firmwarePlugin->factGroups();
