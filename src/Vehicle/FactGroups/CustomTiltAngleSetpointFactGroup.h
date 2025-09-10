@@ -2,7 +2,7 @@
 #include "FactGroup.h"
 
 
-class CustomTiltAngleFactGroup : public FactGroup
+class CustomTiltAngleSetpointFactGroup : public FactGroup
 {
     Q_OBJECT
     // QML에서 FactGroup을 사용할 수 있도록 Qt 속성으로 등록
@@ -14,7 +14,7 @@ class CustomTiltAngleFactGroup : public FactGroup
     Q_PROPERTY(Fact* tiltRr READ tiltRr CONSTANT)
 
 public:
-    explicit CustomTiltAngleFactGroup(QObject* parent = nullptr);
+    explicit CustomTiltAngleSetpointFactGroup(QObject* parent = nullptr);
 
     Fact* tiltFl() { return &_tiltFlFact; }
     Fact* tiltFr() { return &_tiltFrFact; }
@@ -25,7 +25,7 @@ public:
     void handleMessage(Vehicle* vehicle, const mavlink_message_t& message) override;
 
 protected:
-    void _handleTiltAngle(const mavlink_message_t& message);
+    void _handleTiltAngleSetpoint(const mavlink_message_t& message);
 
     Fact _tiltFlFact;
     Fact _tiltFrFact;
@@ -33,6 +33,6 @@ protected:
     Fact _tiltRrFact;
 
 private:
-    void _updateTiltAngle(float fl, float fr, float rl, float rr);
+    void _updateTiltAngleSetpoint(float fl, float fr, float rl, float rr);
 };
 

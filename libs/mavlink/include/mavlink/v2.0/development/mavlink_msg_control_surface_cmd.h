@@ -1,30 +1,30 @@
 #pragma once
 // MESSAGE CONTROL_SURFACE_CMD PACKING
 
-#define MAVLINK_MSG_ID_CONTROL_SURFACE_CMD 514
+#define MAVLINK_MSG_ID_CONTROL_SURFACE_CMD 515
 
 
 typedef struct __mavlink_control_surface_cmd_t {
  uint32_t time_boot_ms; /*< [ms] Timestamp (time since system boot).*/
- float left_aileron; /*< [deg] Left aileron*/
- float right_aileron; /*< [deg] Right aileron*/
- float left_ruddervator; /*< [deg] Left ruddervator*/
- float right_ruddervator; /*< [deg] Right ruddervator*/
+ float left_aileron; /*< [deg] Left aileron command.*/
+ float right_aileron; /*< [deg] Right aileron command.*/
+ float left_ruddervator; /*< [deg] Left ruddervator command.*/
+ float right_ruddervator; /*< [deg] Right ruddervator command.*/
 } mavlink_control_surface_cmd_t;
 
 #define MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_LEN 20
 #define MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_MIN_LEN 20
-#define MAVLINK_MSG_ID_514_LEN 20
-#define MAVLINK_MSG_ID_514_MIN_LEN 20
+#define MAVLINK_MSG_ID_515_LEN 20
+#define MAVLINK_MSG_ID_515_MIN_LEN 20
 
 #define MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_CRC 79
-#define MAVLINK_MSG_ID_514_CRC 79
+#define MAVLINK_MSG_ID_515_CRC 79
 
 
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_CONTROL_SURFACE_CMD { \
-    514, \
+    515, \
     "CONTROL_SURFACE_CMD", \
     5, \
     {  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_control_surface_cmd_t, time_boot_ms) }, \
@@ -54,10 +54,10 @@ typedef struct __mavlink_control_surface_cmd_t {
  * @param msg The MAVLink message to compress the data into
  *
  * @param time_boot_ms [ms] Timestamp (time since system boot).
- * @param left_aileron [deg] Left aileron
- * @param right_aileron [deg] Right aileron
- * @param left_ruddervator [deg] Left ruddervator
- * @param right_ruddervator [deg] Right ruddervator
+ * @param left_aileron [deg] Left aileron command.
+ * @param right_aileron [deg] Right aileron command.
+ * @param left_ruddervator [deg] Left ruddervator command.
+ * @param right_ruddervator [deg] Right ruddervator command.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_control_surface_cmd_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -88,61 +88,16 @@ static inline uint16_t mavlink_msg_control_surface_cmd_pack(uint8_t system_id, u
 }
 
 /**
- * @brief Pack a control_surface_cmd message
- * @param system_id ID of this system
- * @param component_id ID of this component (e.g. 200 for IMU)
- * @param status MAVLink status structure
- * @param msg The MAVLink message to compress the data into
- *
- * @param time_boot_ms [ms] Timestamp (time since system boot).
- * @param left_aileron [deg] Left aileron
- * @param right_aileron [deg] Right aileron
- * @param left_ruddervator [deg] Left ruddervator
- * @param right_ruddervator [deg] Right ruddervator
- * @return length of the message in bytes (excluding serial stream start sign)
- */
-static inline uint16_t mavlink_msg_control_surface_cmd_pack_status(uint8_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
-                               uint32_t time_boot_ms, float left_aileron, float right_aileron, float left_ruddervator, float right_ruddervator)
-{
-#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    char buf[MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_LEN];
-    _mav_put_uint32_t(buf, 0, time_boot_ms);
-    _mav_put_float(buf, 4, left_aileron);
-    _mav_put_float(buf, 8, right_aileron);
-    _mav_put_float(buf, 12, left_ruddervator);
-    _mav_put_float(buf, 16, right_ruddervator);
-
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_LEN);
-#else
-    mavlink_control_surface_cmd_t packet;
-    packet.time_boot_ms = time_boot_ms;
-    packet.left_aileron = left_aileron;
-    packet.right_aileron = right_aileron;
-    packet.left_ruddervator = left_ruddervator;
-    packet.right_ruddervator = right_ruddervator;
-
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_LEN);
-#endif
-
-    msg->msgid = MAVLINK_MSG_ID_CONTROL_SURFACE_CMD;
-#if MAVLINK_CRC_EXTRA
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_MIN_LEN, MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_LEN, MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_CRC);
-#else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_MIN_LEN, MAVLINK_MSG_ID_CONTROL_SURFACE_CMD_LEN);
-#endif
-}
-
-/**
  * @brief Pack a control_surface_cmd message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
  * @param time_boot_ms [ms] Timestamp (time since system boot).
- * @param left_aileron [deg] Left aileron
- * @param right_aileron [deg] Right aileron
- * @param left_ruddervator [deg] Left ruddervator
- * @param right_ruddervator [deg] Right ruddervator
+ * @param left_aileron [deg] Left aileron command.
+ * @param right_aileron [deg] Right aileron command.
+ * @param left_ruddervator [deg] Left ruddervator command.
+ * @param right_ruddervator [deg] Right ruddervator command.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_control_surface_cmd_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -201,28 +156,14 @@ static inline uint16_t mavlink_msg_control_surface_cmd_encode_chan(uint8_t syste
 }
 
 /**
- * @brief Encode a control_surface_cmd struct with provided status structure
- *
- * @param system_id ID of this system
- * @param component_id ID of this component (e.g. 200 for IMU)
- * @param status MAVLink status structure
- * @param msg The MAVLink message to compress the data into
- * @param control_surface_cmd C-struct to read the message contents from
- */
-static inline uint16_t mavlink_msg_control_surface_cmd_encode_status(uint8_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_control_surface_cmd_t* control_surface_cmd)
-{
-    return mavlink_msg_control_surface_cmd_pack_status(system_id, component_id, _status, msg,  control_surface_cmd->time_boot_ms, control_surface_cmd->left_aileron, control_surface_cmd->right_aileron, control_surface_cmd->left_ruddervator, control_surface_cmd->right_ruddervator);
-}
-
-/**
  * @brief Send a control_surface_cmd message
  * @param chan MAVLink channel to send the message
  *
  * @param time_boot_ms [ms] Timestamp (time since system boot).
- * @param left_aileron [deg] Left aileron
- * @param right_aileron [deg] Right aileron
- * @param left_ruddervator [deg] Left ruddervator
- * @param right_ruddervator [deg] Right ruddervator
+ * @param left_aileron [deg] Left aileron command.
+ * @param right_aileron [deg] Right aileron command.
+ * @param left_ruddervator [deg] Left ruddervator command.
+ * @param right_ruddervator [deg] Right ruddervator command.
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -313,7 +254,7 @@ static inline uint32_t mavlink_msg_control_surface_cmd_get_time_boot_ms(const ma
 /**
  * @brief Get field left_aileron from control_surface_cmd message
  *
- * @return [deg] Left aileron
+ * @return [deg] Left aileron command.
  */
 static inline float mavlink_msg_control_surface_cmd_get_left_aileron(const mavlink_message_t* msg)
 {
@@ -323,7 +264,7 @@ static inline float mavlink_msg_control_surface_cmd_get_left_aileron(const mavli
 /**
  * @brief Get field right_aileron from control_surface_cmd message
  *
- * @return [deg] Right aileron
+ * @return [deg] Right aileron command.
  */
 static inline float mavlink_msg_control_surface_cmd_get_right_aileron(const mavlink_message_t* msg)
 {
@@ -333,7 +274,7 @@ static inline float mavlink_msg_control_surface_cmd_get_right_aileron(const mavl
 /**
  * @brief Get field left_ruddervator from control_surface_cmd message
  *
- * @return [deg] Left ruddervator
+ * @return [deg] Left ruddervator command.
  */
 static inline float mavlink_msg_control_surface_cmd_get_left_ruddervator(const mavlink_message_t* msg)
 {
@@ -343,7 +284,7 @@ static inline float mavlink_msg_control_surface_cmd_get_left_ruddervator(const m
 /**
  * @brief Get field right_ruddervator from control_surface_cmd message
  *
- * @return [deg] Right ruddervator
+ * @return [deg] Right ruddervator command.
  */
 static inline float mavlink_msg_control_surface_cmd_get_right_ruddervator(const mavlink_message_t* msg)
 {

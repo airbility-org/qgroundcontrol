@@ -119,7 +119,8 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _terrainFactGroup             (this)
 
     , _fakeFactGroup (this)
-    , _tiltAngleFactGroup (this)
+    , _tiltAngleSetpointFactGroup (this)
+    , _tiltStatusFactGroup(this)
     , _terrainProtocolHandler       (new TerrainProtocolHandler(this, &_terrainFactGroup, this))
     , _controlSurfaceCmdFactGroup(this)
     , _escHbciFactGroup(this)
@@ -226,7 +227,8 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _localPositionFactGroup           (this)
     , _localPositionSetpointFactGroup   (this)
     , _fakeFactGroup (this)
-    , _tiltAngleFactGroup (this)
+    , _tiltAngleSetpointFactGroup (this)
+    , _tiltStatusFactGroup(this)
     , _controlSurfaceCmdFactGroup(this)
     , _escHbciFactGroup(this)
     
@@ -351,7 +353,8 @@ void Vehicle::_commonInit()
     _addFactGroup(&_terrainFactGroup,           _terrainFactGroupName);
 
     _addFactGroup(&_fakeFactGroup, _fakeFactGroupName);
-    _addFactGroup(&_tiltAngleFactGroup, _tiltAngleFactGroupName);
+    _addFactGroup(&_tiltAngleSetpointFactGroup, _tiltAngleSetpointFactGroupName);
+    _addFactGroup(&_tiltStatusFactGroup, _tiltStatusFactGroupName);
     _addFactGroup(&_controlSurfaceCmdFactGroup, _controlSurfaceCmdFactGroupName);
     _addFactGroup(&_escHbciFactGroup, _escHbciFactGroupName);
 

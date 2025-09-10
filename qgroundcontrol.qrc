@@ -436,7 +436,8 @@
         <file alias="CameraMetaData.json">src/Camera/CameraMetaData.json</file>
         
         <file alias="Vehicle/FakeFactGroup.json">src/Vehicle/FactGroups/FakeFactGroup.json</file>
-        <file alias="Vehicle/CustomTiltAngleFactGroup.json">src/Vehicle/FactGroups/CustomTiltAngleFactGroup.json</file>
+        <file alias="Vehicle/CustomTiltAngleSetpointFactGroup.json">src/Vehicle/FactGroups/CustomTiltAngleSetpointFactGroup.json</file>
+        <file alias="Vehicle/CustomTiltStatusFactGroup.json">src/Vehicle/FactGroups/CustomTiltStatusFactGroup.json</file>
 
         <file alias="Vehicle/ControlSurfaceCmdFactGroup.json">src/Vehicle/FactGroups/ControlSurfaceCmdFactGroup.json</file>
         <file alias="Vehicle/EscHBCIFactGroup.json">src/Vehicle/FactGroups/EscHBCIFactGroup.json</file>
