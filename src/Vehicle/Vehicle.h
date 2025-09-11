@@ -54,6 +54,10 @@
 
 #include "FactGroups/EscHBCIFactGroup.h"
 
+#include "FactGroups/ControlSurfaceCmdFactGroup.h"
+
+#include "FactGroups/EscHBCIFactGroup.h"
+
 class Actuators;
 class AutoPilotPlugin;
 class Autotune;
