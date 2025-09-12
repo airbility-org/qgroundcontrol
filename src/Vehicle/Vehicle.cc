@@ -224,15 +224,9 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _localPositionFactGroup           (this)
     , _localPositionSetpointFactGroup   (this)
     , _fakeFactGroup (this)
-<<<<<<< HEAD
-    , _tiltAngleFactGroup (this)
-=======
     , _tiltAngleSetpointFactGroup (this)
     , _tiltStatusFactGroup(this)
-    , _controlSurfaceCmdFactGroup(this)
-    , _escHbciFactGroup(this)
     
->>>>>>> f2c4e8c53 (Add tilt angle status information to HUD and change the name of tilt angle -> tilt angle setpoint)
 {
     // This will also set the settings based firmware/vehicle types. So it needs to happen first.
     if (_firmwareType == MAV_AUTOPILOT_TRACK) {
