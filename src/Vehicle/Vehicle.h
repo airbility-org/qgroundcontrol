@@ -49,6 +49,7 @@
 #include "FakeFactGroup.h"
 #include "CustomTiltAngleSetpointFactGroup.h"
 #include "CustomTiltStatusFactGroup.h"
+#include "FactGroups/ControlSurfaceCmdFactGroup.h"
 
 class Actuators;
 class AutoPilotPlugin;
@@ -276,6 +277,7 @@ public:
     Q_PROPERTY(FactGroup*           hygrometer      READ hygrometerFactGroup        CONSTANT)
     Q_PROPERTY(FactGroup*           generator       READ generatorFactGroup         CONSTANT)
     Q_PROPERTY(FactGroup*           efi             READ efiFactGroup               CONSTANT)
+    Q_PROPERTY(FactGroup*           controlSurfaceCmd READ controlSurfaceCmdFactGroup    CONSTANT)
     Q_PROPERTY(QmlObjectListModel*  batteries       READ batteries                  CONSTANT)
     Q_PROPERTY(Actuators*           actuators       READ actuators                  CONSTANT)
     Q_PROPERTY(HealthAndArmingCheckReport* healthAndArmingCheckReport READ healthAndArmingCheckReport CONSTANT)
@@ -621,6 +623,7 @@ public:
     FactGroup* fakeFactGroup () { return &_fakeFactGroup; }
     FactGroup* tiltAngleSetpointFactGroup () { return &_tiltAngleSetpointFactGroup; }
     FactGroup* tiltStatusFactGroup () { return &_tiltStatusFactGroup; }
+    FactGroup* controlSurfaceCmdFactGroup() { return &_controlSurfaceCmdFactGroup; }
 
     QmlObjectListModel* batteries           () { return &_batteryFactGroupListModel; }
 
@@ -1267,6 +1270,7 @@ private:
     const QString _fakeFactGroupName = QStringLiteral("fake");
     const QString _tiltAngleSetpointFactGroupName = QStringLiteral("tiltAngleSetpoint");
     const QString _tiltStatusFactGroupName = QStringLiteral("tiltStatus");
+    const QString _controlSurfaceCmdFactGroupName = QStringLiteral("controlSurfaceCmd");
 
     VehicleFactGroup*               _vehicleFactGroup;
     VehicleGPSFactGroup             _gpsFactGroup;
@@ -1290,6 +1294,7 @@ private:
     FakeFactGroup _fakeFactGroup;
     CustomTiltAngleSetpointFactGroup _tiltAngleSetpointFactGroup;
     CustomTiltStatusFactGroup _tiltStatusFactGroup;
+    ControlSurfaceCmdFactGroup _controlSurfaceCmdFactGroup;
     
     QmlObjectListModel              _batteryFactGroupListModel;
 
